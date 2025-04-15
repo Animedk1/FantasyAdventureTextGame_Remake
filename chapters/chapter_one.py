@@ -3,7 +3,7 @@ from state import player, game_state
 from utils import typewriter, clear_screen, get_choice
 from engine import unarmored_event
 # ───────────────────────────────────────────────
-# Choose (1) functions
+# Choice (1) functions
 # Notes:
 #   - All three option lead you to talking with the sword
 #   - Options that don't include equiping armor will lead you to a random death event
@@ -34,12 +34,19 @@ def check_fire():
     time.sleep(0.3)
     typewriter("After inspecting the fire you see the snow is covering the remains of what looks like was once a campsite")
     time.sleep(0.3)
-    typewriter("Upon further inspection you can tell this place was abandonded some time ag...though exactly how long, you can't quite tell(+1 intelligence)")
+    typewriter("Upon further inspection you can tell this place was abandonded some time ag...though exactly how long, you can't quite tell (+1 intelligence)")
     player["stats"]["intelligence"] += 1
     typewriter("While taking in the environemt around you, you hear a fient noise that echoes that of a whisper.")
     time.sleep(0.3)
     typewriter("Upon further inspection, you notice it's the sword.")
     check_sword()
+
+    # ───────────────────────────────────────────────
+# Choice (2) functions
+# Notes:
+#   - All three option lead you to talking with the sword
+#   - Options that don't include equiping armor will lead you to a random death event
+# ───────────────────────────────────────────────
 
 def Chapter_one_start():
     player["checkpoint"] = "chapter_one"
