@@ -6,7 +6,6 @@ from engine import unarmored_event
 # Choice (1) functions
 # Notes:
 #   - All three option lead you to talking with the sword
-#   - Options that don't include equiping armor will lead you to a random death event
 # ───────────────────────────────────────────────
 
 def check_sword():
@@ -41,12 +40,20 @@ def check_fire():
     typewriter("Upon further inspection, you notice it's the sword.")
     check_sword()
 
-    # ───────────────────────────────────────────────
-# Choice (2) functions
-# Notes:
-#   - All three option lead you to talking with the sword
-#   - Options that don't include equiping armor will lead you to a random death event
 # ───────────────────────────────────────────────
+# Choice (2) functions
+#
+# ───────────────────────────────────────────────
+
+
+
+
+
+
+
+
+# Game Narrative Start
+# ───────────
 
 def Chapter_one_start():
     player["checkpoint"] = "chapter_one"
@@ -77,6 +84,8 @@ def Chapter_one_start():
         check_fire()
     elif choice == "c":
         check_sword()
-
+# ───────────────────────────────────────────────
+# Bonus Encounter if not armored
+# ───────────────────────────────────────────────
     if not player["armored"]:
         unarmored_event()
