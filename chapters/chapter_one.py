@@ -10,24 +10,34 @@ from engine import unarmored_event
 # ───────────────────────────────────────────────
 
 def check_sword():
-    typewriter("While reaching to grab the sword from the snow, you hear a voice calling to you.")
+    clear_screen()
+    typewriter("You readh out to grab the sword but before you do")
     game_state["met_mysterious_voice"] = True
 
 def equip_armour():
+    clear_screen()
     typewriter("You walk over and grab the armour from the snow.")
+    time.sleep(0.3)
     typewriter("Upon closer inspection, you realize you've never seen armor made of this material.")
+    time.sleep(0.3)
     typewriter("When placing the armour on your body, you're met with a feeling of dread—a burning sensation courses through you.")
+    time.sleep(0.3)
     player["armored"] = True
     player["inventory"].append("Eldrich Plate Armour")
+    check_sword()
 
 def check_fire():
+    clear_screen()
     typewriter("You lean down and check the fire.")
     time.sleep(0.3)
     typewriter("It's too far gone. The embers are cold and dead.")
-    time.sleep(1)
+    time.sleep(0.3)
+    typewriter("After inspecting the fire you see the snow is covering the remains of what looks like was once a campsite")
+    time.sleep(0.3)
+    typewriter("Upon further inspection you can tell this place was abandonded some time ag...though exactly how long, you can't quite tell(+1 intelligence)")
     player["stats"]["intelligence"] += 1
-    clear_screen()
-    typewriter("While looking at the fire, you hear a low ringing coming from behind you.")
+    typewriter("While taking in the environemt around you, you hear a fient noise that echoes that of a whisper.")
+    time.sleep(0.3)
     typewriter("Upon further inspection, you notice it's the sword.")
     check_sword()
 
