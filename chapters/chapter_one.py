@@ -2,6 +2,12 @@ import time
 from state import player, game_state
 from utils import typewriter, clear_screen, get_choice
 from engine import unarmored_event
+# ───────────────────────────────────────────────
+# Choose (1) functions
+# Notes:
+#   - All three option lead you to talking with the sword
+#   - Options that don't include equiping armor will lead you to a random death event
+# ───────────────────────────────────────────────
 
 def check_sword():
     typewriter("While reaching to grab the sword from the snow, you hear a voice calling to you.")
@@ -41,8 +47,8 @@ def Chapter_one_start():
     time.sleep(0.3)
     typewriter("You stand up and consider your next move...\n")
 
-    print("a) Equip your armour to retain body heat")
-    print("b) Lean over towards the fire to see if it can be relit")
+    print("a) Equip your armour")
+    print("b) Inspect the small camp around you")
     print("c) Inspect the sword beneath the snow\n")
     print("(Type 'help' for command list)")
 

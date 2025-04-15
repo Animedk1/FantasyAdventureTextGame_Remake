@@ -11,16 +11,16 @@ def unarmored_event():
     Triggered in Chapter 1 if the player does NOT equip the armor.
     40% chance of instant game over, 60% chance of +2 Strength.
     """
-    typewriter("Without your armor, the icy wind cuts deeper than expected...")
-    typewriter("You collapse briefly from the cold...")
+    typewriter("")
+    typewriter("")
     roll = random.randint(1, 100)
 
     if roll <= 40:
-        typewriter("Your vision fades. The cold has claimed you.")
-        typewriter("GAME OVER")
+        typewriter("")
+        typewriter("")
         exit()
     else:
-        typewriter("But your will hardens through the suffering...")
+        typewriter("")
         typewriter("You stand taller, stronger. (+2 Strength)")
         player["stats"]["strength"] += 2
 

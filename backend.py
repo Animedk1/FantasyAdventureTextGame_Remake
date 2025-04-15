@@ -29,8 +29,13 @@ def load_game():
     try:
         with open(get_save_path(), "r") as f:
             save_data = json.load(f)
-            player = save_data.get("player", player)
-            game_state = save_data.get("game_state", game_state)
+            # Update in place instead of replacing
+            player.clear()
+            player.update(save_data.get("player", {}))
+
+            game_state.clear()
+            game_state.update(save_data.get("game_state", {}))
+
         typewriter("\nGame loaded successfully!\n")
         time.sleep(1)
         clear_screen()
@@ -39,6 +44,7 @@ def load_game():
         typewriter("\nNo save file found.\n")
     except Exception as e:
         typewriter(f"\nFailed to load game: {e}")
+
 
 def delete_save():
     try:

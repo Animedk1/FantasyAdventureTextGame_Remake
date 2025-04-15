@@ -1,7 +1,7 @@
 import time
 import sys
 import os
-from state import player
+from state import player, game_state
 
 # ───────────────────────────────────────────────
 # SYSTEM UTILITIES
@@ -33,17 +33,24 @@ def safe_input(prompt="→ ", pause_time=0.1):
 # ───────────────────────────────────────────────
 
 def show_stats():
+    # Show basic stats
     typewriter(f"\nName: {player['name'] or 'Unknown'}")
     typewriter(f"Gold: {player['gold']}")
     typewriter(f"Armored: {'Yes' if player['armored'] else 'No'}")
+
+    # Player attributes
     typewriter("\nStats:")
     for stat, value in player["stats"].items():
         typewriter(f"  {stat.title()}: {value}")
-    if player["relationships"]:
-        typewriter("\nRelationships:")
-        for person, score in player["relationships"].items():
-            typewriter(f"  {person}: {score}")
 
+    # Only show Relationships section if at least one person is met
+    met_anyone = game_state.get("erena_met") or game_state.get("markus_met")
+    if met_anyone:
+        typewriter("\nRelationships:")
+        if game_state.get("erena_met"):
+            typewriter(f"  Erena: {player['relationships'].get('Erena', 0)}")
+        if game_state.get("markus_met"):
+            typewriter(f"  Markus: {player['relationships'].get('Markus', 0)}")
 def show_inventory():
     if player["inventory"]:
         typewriter("\nYou're carrying:")
