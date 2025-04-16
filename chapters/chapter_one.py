@@ -12,7 +12,11 @@ def check_sword():
     clear_screen()
     typewriter("As you reach out to grab the sword from the snow, you feel a sharp pain in your chest")
     time.sleep(0.3)
-    typewriter("As you reach out to grab the sword from the snow, you feel a sharp pain in your chest")
+    typewriter("The sensation is so strong it brings you to your knees")
+    time.sleep(0.3)
+    typewriter("As you look up from staring down at the cold ground you realize the feeling of the bitter cold has dissipated and the world in front of you has changed.")
+    time.sleep(0.3)
+    typewriter("In front of you, you see  ")
     game_state["met_mysterious_voice"] = True
 
 def equip_armour():

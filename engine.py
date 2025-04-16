@@ -10,6 +10,7 @@ def unarmored_event():
     """
     Triggered in Chapter 1 if the player does NOT equip the armor.
     40% chance of instant game over, 60% chance of +2 Strength.
+
     """
     typewriter("")
     typewriter("")
@@ -17,12 +18,14 @@ def unarmored_event():
 
     if roll <= 40:
         typewriter("")
-        typewriter("")
+        typewriter("Perhaps the next will be prove to worth my time")
         exit()
     else:
-        typewriter("")
-        typewriter("You stand taller, stronger. (+2 Strength)")
+        typewriter("You were foolish to not wear what was given to you...")
+        typewriter("But perhaps you're  (+2 Strength)")
         player["stats"]["strength"] += 2
+        player["armored"] = True
+        player["inventory"].append("Eldrich Plate Armour")
 
 
 # ───────────────────────────────────────────────
@@ -39,6 +42,7 @@ shop_inventory = {
 def open_shop():
     """
     Opens the shop if it has been unlocked via story.
+    
     """
     if not game_state.get("shop_unlocked", False):
         typewriter("You don't know where any shops are yet.")
