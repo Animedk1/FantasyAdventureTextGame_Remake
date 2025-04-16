@@ -10,7 +10,9 @@ from engine import unarmored_event
 
 def check_sword():
     clear_screen()
-    typewriter("You readh out to grab the sword but before you do")
+    typewriter("As you reach out to grab the sword from the snow, you feel a sharp pain in your chest")
+    time.sleep(0.3)
+    typewriter("As you reach out to grab the sword from the snow, you feel a sharp pain in your chest")
     game_state["met_mysterious_voice"] = True
 
 def equip_armour():
@@ -42,7 +44,6 @@ def check_fire():
 
 # ───────────────────────────────────────────────
 # Choice (2) functions
-#
 # ───────────────────────────────────────────────
 
 
