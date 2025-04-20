@@ -3,7 +3,7 @@ import sys
 import os
 import pygame
 import random
-import state
+import state 
 
 # ───────────────────────────────────────────────
 # SYSTEM UTILITIES
@@ -11,6 +11,14 @@ import state
 
 pygame.mixer.init()
 
+# Load background music
+pygame.mixer.music.load("audio/bgmusic.mp3")  # ← Replace with your actual music file
+pygame.mixer.music.set_volume(0.3)
+
+if state.musicOn:
+    pygame.mixer.music.play(-1)  # Loop forever
+
+# Load typing sounds
 typing_sounds = [
     pygame.mixer.Sound("audio/click1.wav"),
     pygame.mixer.Sound("audio/click2.wav"),
@@ -42,6 +50,13 @@ def safe_input(prompt="→ ", pause_time=0.1):
     time.sleep(pause_time)
     flush_input()
     return input(prompt)
+
+def toggle_music(on: bool):
+    state.musicOn = on
+    if on:
+        pygame.mixer.music.play(-1)
+    else:
+        pygame.mixer.music.stop()
 
 # ───────────────────────────────────────────────
 # DEFAULT DISPLAY FUNCTIONS
@@ -89,6 +104,8 @@ def get_choice(valid_choices):
             print("  \u001b[1mgold\u001b[0m      - Check how much gold you have")
             print("  \u001b[1msound on\u001b[0m    - Enable typewriter sound effects")
             print("  \u001b[1msound off\u001b[0m   - Disable typewriter sound effects")
+            print("  \u001b[1mmusic on\u001b[0m    - Play background music")
+            print("  \u001b[1mmusic off\u001b[0m   - Stop background music")
             print("  \u001b[1msave\u001b[0m      - Save your current progress")
             print("  \u001b[1mload\u001b[0m      - Load your last saved game")
             print("  \u001b[1mrestart\u001b[0m   - Delete your save and start fresh")
@@ -116,6 +133,12 @@ def get_choice(valid_choices):
         elif choice == "sound off":
             state.soundOP = False
             typewriter("Typewriter sound has been turned OFF.")
+        elif choice == "music on":
+            toggle_music(True)
+            typewriter("Background music is now playing.")
+        elif choice == "music off":
+            toggle_music(False)
+            typewriter("Background music has been stopped.")
         elif choice in valid_choices:
             return choice
         else:
