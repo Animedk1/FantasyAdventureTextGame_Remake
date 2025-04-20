@@ -87,6 +87,8 @@ def get_choice(valid_choices):
             print("  \u001b[1mstats\u001b[0m     - View your character stats and relationships")
             print("  \u001b[1minventory\u001b[0m - See what items you're carrying")
             print("  \u001b[1mgold\u001b[0m      - Check how much gold you have")
+            print("  \u001b[1msound on\u001b[0m    - Enable typewriter sound effects")
+            print("  \u001b[1msound off\u001b[0m   - Disable typewriter sound effects")
             print("  \u001b[1msave\u001b[0m      - Save your current progress")
             print("  \u001b[1mload\u001b[0m      - Load your last saved game")
             print("  \u001b[1mrestart\u001b[0m   - Delete your save and start fresh")
@@ -108,6 +110,12 @@ def get_choice(valid_choices):
             load_game()
         elif choice in ["restart", "delete"]:
             delete_save()
+        elif choice == "sound on":
+            state.soundOP = True
+            typewriter("Typewriter sound has been turned ON.")
+        elif choice == "sound off":
+            state.soundOP = False
+            typewriter("Typewriter sound has been turned OFF.")
         elif choice in valid_choices:
             return choice
         else:

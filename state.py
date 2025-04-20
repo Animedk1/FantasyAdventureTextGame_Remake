@@ -39,4 +39,4 @@ game_state = {
 # state.py
 
 soundOP = True  # Default: sound is ON
-
+musicOn = True # Default: Music is on
