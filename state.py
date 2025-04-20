@@ -32,3 +32,11 @@ game_state = {
     "erena_met": False,
     "markus_met": False
 }
+
+# ───────────────────────────────────────────────
+# Sound STATE
+# ───────────────────────────────────────────────
+# state.py
+
+soundOP = True  # Default: sound is ON
+

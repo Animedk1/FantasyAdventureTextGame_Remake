@@ -1,14 +1,29 @@
 import time
 import sys
 import os
-from state import player, game_state
+import pygame
+import random
+import state
 
 # ───────────────────────────────────────────────
 # SYSTEM UTILITIES
 # ───────────────────────────────────────────────
 
+pygame.mixer.init()
+
+typing_sounds = [
+    pygame.mixer.Sound("audio/click1.wav"),
+    pygame.mixer.Sound("audio/click2.wav"),
+    pygame.mixer.Sound("audio/click3.wav"),
+    pygame.mixer.Sound("audio/click4.wav"),
+    pygame.mixer.Sound("audio/click5.wav"),
+]
+
 def typewriter(text, delay=0.05):
     for char in text:
+        if state.soundOP:
+            sound = random.choice(typing_sounds)
+            sound.play()
         time.sleep(delay)
         sys.stdout.write(char)
         sys.stdout.flush()
@@ -33,38 +48,37 @@ def safe_input(prompt="→ ", pause_time=0.1):
 # ───────────────────────────────────────────────
 
 def show_stats():
-    # Show basic stats
-    typewriter(f"\nName: {player['name'] or 'Unknown'}")
-    typewriter(f"Gold: {player['gold']}")
-    typewriter(f"Armored: {'Yes' if player['armored'] else 'No'}")
+    typewriter(f"\nName: {state.player['name'] or 'Unknown'}")
+    typewriter(f"Gold: {state.player['gold']}")
+    typewriter(f"Armored: {'Yes' if state.player['armored'] else 'No'}")
 
-    # Player attributes
     typewriter("\nStats:")
-    for stat, value in player["stats"].items():
+    for stat, value in state.player["stats"].items():
         typewriter(f"  {stat.title()}: {value}")
 
-    # Only show Relationships section if at least one person is met
-    met_anyone = game_state.get("erena_met") or game_state.get("markus_met")
+    met_anyone = state.game_state.get("erena_met") or state.game_state.get("markus_met")
     if met_anyone:
         typewriter("\nRelationships:")
-        if game_state.get("erena_met"):
-            typewriter(f"  Erena: {player['relationships'].get('Erena', 0)}")
-        if game_state.get("markus_met"):
-            typewriter(f"  Markus: {player['relationships'].get('Markus', 0)}")
+        if state.game_state.get("erena_met"):
+            typewriter(f"  Erena: {state.player['relationships'].get('Erena', 0)}")
+        if state.game_state.get("markus_met"):
+            typewriter(f"  Markus: {state.player['relationships'].get('Markus', 0)}")
+
 def show_inventory():
-    if player["inventory"]:
+    if state.player["inventory"]:
         typewriter("\nYou're carrying:")
-        for item in player["inventory"]:
+        for item in state.player["inventory"]:
             typewriter(f"- {item}")
     else:
         typewriter("\nYour inventory is empty.")
 
 # ───────────────────────────────────────────────
-# INPUT HANDLER (with commands)
+# INPUT HANDLER (with command support)
 # ───────────────────────────────────────────────
 
 def get_choice(valid_choices):
     from backend import save_game, load_game, delete_save
+
     while True:
         choice = safe_input().lower()
 
@@ -87,7 +101,7 @@ def get_choice(valid_choices):
         elif choice == "inventory":
             show_inventory()
         elif choice == "gold":
-            print(f"\nYou currently have {player['gold']} gold.\n")
+            print(f"\nYou currently have {state.player['gold']} gold.\n")
         elif choice == "save":
             save_game()
         elif choice == "load":

@@ -1,8 +1,8 @@
 import os
 import json
 import time
+import state
 from utils import typewriter, clear_screen, safe_input
-from state import player, game_state
 from chapters.chapter_one import Chapter_one_start
 
 # ───────────────────────────────────────────────
@@ -17,7 +17,7 @@ def get_save_path():
 
 def save_game():
     try:
-        save_data = {"player": player, "game_state": game_state}
+        save_data = {"player": state.player, "game_state": state.game_state}
         with open(get_save_path(), "w") as f:
             json.dump(save_data, f)
         typewriter("\nGame saved successfully!\n")
@@ -25,26 +25,25 @@ def save_game():
         typewriter(f"\nFailed to save game: {e}")
 
 def load_game():
-    global player, game_state
     try:
         with open(get_save_path(), "r") as f:
             save_data = json.load(f)
-            # Update in place instead of replacing
-            player.clear()
-            player.update(save_data.get("player", {}))
 
-            game_state.clear()
-            game_state.update(save_data.get("game_state", {}))
+            # Update in-place to preserve references
+            state.player.clear()
+            state.player.update(save_data.get("player", {}))
+
+            state.game_state.clear()
+            state.game_state.update(save_data.get("game_state", {}))
 
         typewriter("\nGame loaded successfully!\n")
         time.sleep(1)
         clear_screen()
-        resume_checkpoint(player.get("checkpoint", "intro"))
+        resume_checkpoint(state.player.get("checkpoint", "intro"))
     except FileNotFoundError:
         typewriter("\nNo save file found.\n")
     except Exception as e:
         typewriter(f"\nFailed to load game: {e}")
-
 
 def delete_save():
     try:
@@ -103,7 +102,7 @@ def startMenu():
         gameIntro()
 
 def gameIntro():
-    player["checkpoint"] = "intro"
+    state.player["checkpoint"] = "intro"
     typewriter("Your Journey begins here, but before you venture forth...")
     time.sleep(1)
     name = safe_input("What is your name:\n→ ").strip().title()
@@ -111,12 +110,14 @@ def gameIntro():
     confirm = safe_input(f"\nSo your name is {name}? (y/n): ").lower()
 
     if confirm == "y":
-        player["name"] = name
+        state.player["name"] = name
         time.sleep(2)
         typewriter("\nInteresting...")
         time.sleep(1)
         typewriter("I wonder what path you'll take.")
         time.sleep(2)
+        clear_screen()
+        prompt_sound_setting()
         clear_screen()
         Chapter_one_start()
     else:
@@ -124,3 +125,16 @@ def gameIntro():
         time.sleep(2)
         clear_screen()
         gameIntro()
+
+# ───────────────────────────────────────────────
+# SOUND SETTING PROMPT
+# ───────────────────────────────────────────────
+
+def prompt_sound_setting():
+    sound_input = safe_input("Would you like the text sound on or off? (y/n): ").lower()
+    if sound_input == "y":
+        state.soundOP = True
+        typewriter("Text sound has been enabled. You can disable it anytime by typing 'sound off'.")
+    else:
+        state.soundOP = False
+        typewriter("Text sound has been turned off. You can enable it anytime by typing 'sound on'.")
