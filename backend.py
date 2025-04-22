@@ -131,7 +131,7 @@ def gameIntro():
 # ───────────────────────────────────────────────
 
 def prompt_sound_setting():
-    sound_input = safe_input("Would you like the text sound on or off? (y/n): ").lower()
+    sound_input = safe_input("Would you like to keep the text sound enabled? (y/n): ").lower()
     if sound_input == "y":
         state.soundOP = True
         typewriter("Text sound has been enabled. You can disable it anytime by typing 'sound off'.")

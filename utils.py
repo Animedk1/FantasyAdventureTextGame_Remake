@@ -11,6 +11,15 @@ import state
 
 pygame.mixer.init()
 
+#Add the skill gain sound
+skill_gain_sound = pygame.mixer.Sound("audio/skill_gain.wav")
+skill_gain_sound.set_volume(0.8)  # optional
+
+#Play Skill Gain sound
+def play_skill_gain_sound():
+    skill_gain_sound.play()
+
+
 # Load background music
 pygame.mixer.music.load("audio/bgmusic.mp3")  # ← Replace with your actual music file
 pygame.mixer.music.set_volume(0.3)
