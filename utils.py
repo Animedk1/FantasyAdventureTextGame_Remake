@@ -66,6 +66,17 @@ def toggle_music(on: bool):
         pygame.mixer.music.play(-1)
     else:
         pygame.mixer.music.stop()
+        
+# ───────────────────────────────────────────────
+# SPEAKER FORMATTER
+# ───────────────────────────────────────────────
+
+def print_speaker(name, mood=None):
+    if mood:
+        print(f"\n>> \u001b[1m{name} ({mood})\u001b[0m <<")
+    else:
+        print(f"\n>> \u001b[1m{name}\u001b[0m <<")
+
 
 # ───────────────────────────────────────────────
 # DEFAULT DISPLAY FUNCTIONS

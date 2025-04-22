@@ -2,7 +2,7 @@ import time
 from state import player, game_state
 from utils import typewriter, clear_screen, get_choice
 from engine import unarmored_event
-from utils import play_skill_gain_sound
+from utils import play_skill_gain_sound, print_speaker
 # ───────────────────────────────────────────────
 # Choice (1) functions
 # Notes:
@@ -17,8 +17,17 @@ def check_sword():
     time.sleep(0.3)
     typewriter("As you look up from staring down at the cold ground you realize the feeling of the bitter cold has dissipated and the world in front of you has changed.")
     time.sleep(0.3)
-    typewriter("In front of you, you see  ")
+    typewriter(" ")
+    clear_screen()
     game_state["met_mysterious_voice"] = True
+    print_speaker("Mysterious Voice")
+    time.sleep(0.5)
+    typewriter("Calm")
+    time.sleep(1)
+    clear_screen()
+    typewriter("Your time is short here so listen.")
+    time.sleep(1)
+    typewriter("You've been gifted power")
 
 def equip_armour():
     clear_screen()
