@@ -148,7 +148,7 @@ def Chapter_one_start():
 
 
 def chapter_one_scene2():
-    typewriter("As you apporach the village, ")
+    typewriter("As you approach the village, ")
 
 # ───────────────────────────────────────────────
 # Scene 2: Story Branch - Bath house
