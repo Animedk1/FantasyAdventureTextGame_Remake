@@ -17,17 +17,20 @@ def check_sword():
     time.sleep(0.3)
     typewriter("As you look up from staring down at the cold ground you realize the feeling of the bitter cold has dissipated and the world in front of you has changed.")
     time.sleep(0.3)
-    typewriter(" ")
+    typewriter("A dark red hue covers the sky and you find yourself standing atop a tower built of the some type of black stone. ")
+    time.sleep(0.3)
+    typewriter("Behind you is a sealed door that looks as if it leads to the tower")
+    time.sleep(0.3)
+    typewriter("Before you can bring yourself to investigate you hear a voice coming from the sky")
+    time.sleep(2)
     clear_screen()
     game_state["met_mysterious_voice"] = True
     print_speaker("Mysterious Voice")
-    time.sleep(0.5)
-    typewriter("Calm")
     time.sleep(1)
-    clear_screen()
     typewriter("Your time is short here so listen.")
-    time.sleep(1)
-    typewriter("You've been gifted power")
+    time.sleep(0.3)
+    typewriter("I have a task for you")
+    time.sleep(0.3)
 
 def equip_armour():
     clear_screen()
@@ -60,10 +63,30 @@ def check_fire():
     typewriter("Upon further inspection, you notice it's the sword.")
     check_sword()
 
+def equip_armor_scene_1():
+    typewriter("You look down at the armor laying in the snow and winder your next move...")
+    print("a) Equip the armour")
+    print("b) Continue without it")
+    print("(Type 'help' for command list)")
+
+    choice = get_choice(["a", "b"])
+
+    if choice =="a":
+        typewriter("You've choosen to waer the armor")
+        player["armored"] = True
+        player["inventory"].append("Eldrich Plate Armour")
+    elif choice == "b":
+        typewriter("You've chosen to leave the armor behind")
+
 # ───────────────────────────────────────────────
 # Choice (2) functions
 # ───────────────────────────────────────────────
+def travel_to_inn():
+    typewriter("")
 
+
+def travel_to_tavern():
+    typewriter("")
 
 
 
@@ -73,7 +96,13 @@ def check_fire():
 
 # Game Narrative Start
 # ───────────
-
+# ───────────────────────────────────────────────
+# Scene 1: 
+# - 
+# - Potential Skill Gains
+#   - +1 INT
+#   - +2 STR
+# ───────────────────────────────────────────────    
 def Chapter_one_start():
     player["checkpoint"] = "chapter_one"
 
@@ -104,7 +133,38 @@ def Chapter_one_start():
     elif choice == "c":
         check_sword()
 # ───────────────────────────────────────────────
+# Last Chance to equip armor
+# ───────────────────────────────────────────────
+    if not player["armored"]:
+        equip_armor_scene_1()
+
+# ───────────────────────────────────────────────
 # Bonus Encounter if not armored
 # ───────────────────────────────────────────────
     if not player["armored"]:
         unarmored_event()
+#Start of Scene 2
+    chapter_one_scene2()
+
+
+def chapter_one_scene2():
+    typewriter("As you apporach the village, ")
+
+# ───────────────────────────────────────────────
+# Scene 2: Story Branch - Bath house
+# - Major Event: Meet Markus
+# - Major SKill Checks: STR.
+# - Potential Skill Gains
+#   - 
+# ───────────────────────────────────────────────    
+
+
+
+
+# ───────────────────────────────────────────────
+# Sceene 2: Story Branch - Tavern
+# - Major Events: Questioned by Armor, Meet Erena, 
+# - Major Skill Checks: INT. 
+# - Potential Skill Gains
+#   - 
+# ───────────────────────────────────────────────
