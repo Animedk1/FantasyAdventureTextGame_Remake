@@ -1,5 +1,6 @@
 import random
-from utils import typewriter, safe_input, clear_screen
+import time
+from utils import typewriter, safe_input, clear_screen,print_speaker,game_over
 from state import player, game_state
 
 # ───────────────────────────────────────────────
@@ -12,17 +13,40 @@ def unarmored_event():
     40% chance of instant game over, 60% chance of +2 Strength.
 
     """
-    typewriter("")
-    typewriter("")
+    typewriter("You begin to make your way to the village but feel an unnatural chill from the winds around you")
+    time.sleep(0.3)
+    typewriter("As you attempt to push through you hear voices whispering with in the winds")
+    time.sleep(2)
+    clear_screen()
+    game_state["met_mysterious__wind_voice"] = True
+    print_speaker("Voices of the Wind")
+    typewriter("We shall not allow you past this point. The sword you carry is cursed and will only bring suffering to these Isles.")
+    time.sleep(1)
+    typewriter("WE MUST KILL YOU")
+    time.sleep(3)
+    clear_screen()
+
     roll = random.randint(1, 100)
 
     if roll <= 40:
-        typewriter("")
-        typewriter("Perhaps the next will be prove to worth my time")
-        exit()
+        typewriter("As the winds pick up you try your hardest to resist. The bitter cold feels like needles ripping into your skin.")
+        time.sleep(0.5)
+        typewriter("Though you tried your best to survive the cold has claimed you. Another soul has been lost.")
+        time.sleep(0.5)
+        print_speaker("Mysterious Voice")
+        typewriter("Perhaps the next will be prove to worth my time.")
+        time.sleep(0.5)
+        game_over()
     else:
+        typewriter("The storm rages on and you try your hardest to resist. The bitter cold feels like needles ripping into your skin but through some miracle you somehow survive")
+        time.sleep(0.5)
+        typewriter("The storm slowly subsides. You lean against a cliff not too far from the path you were walking to rest for a moment. The sword on your hip glows and the mysterious voice from before begin to speak")
+        print_speaker("Mysterious Voice")
         typewriter("You were foolish to not wear what was given to you...")
-        typewriter("But perhaps you're  (+2 Strength)")
+        time.sleep(0.5)
+        typewriter("But perhaps you're foolishness proves something. (+2 Strength)")
+        time.sleep(0.5)
+        typewriter("While there are others, you are important to this. I've imprinted the armor into your soul. Do not continue to treat your life so carelessly")
         player["stats"]["strength"] += 2
         player["armored"] = True
         player["inventory"].append("Eldrich Plate Armour")

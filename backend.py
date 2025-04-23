@@ -4,6 +4,7 @@ import time
 import state
 from utils import typewriter, clear_screen, safe_input
 from chapters.chapter_one import Chapter_one_start
+#from config import DEV_MODE
 
 # ───────────────────────────────────────────────
 # SAVE / LOAD SYSTEM
@@ -35,7 +36,7 @@ def load_game():
 
             state.game_state.clear()
             state.game_state.update(save_data.get("game_state", {}))
-
+ 
         typewriter("\nGame loaded successfully!\n")
         time.sleep(1)
         clear_screen()
@@ -119,6 +120,8 @@ def gameIntro():
         clear_screen()
         prompt_sound_setting()
         clear_screen()
+        #bg_music_setting()
+        clear_screen()
         Chapter_one_start()
     else:
         typewriter("Let's try again.\n")
@@ -126,6 +129,8 @@ def gameIntro():
         clear_screen()
         gameIntro()
 
+# ───────────────────────────────────────────────
+# DEV MODE
 # ───────────────────────────────────────────────
 # SOUND SETTING PROMPT
 # ───────────────────────────────────────────────
@@ -138,3 +143,12 @@ def prompt_sound_setting():
     else:
         state.soundOP = False
         typewriter("Text sound has been turned off. You can enable it anytime by typing 'sound on'.")
+
+def bg_music_setting():
+    music_input = safe_input("Would you like to enable background music? (y/n): ").lower()
+    if music_input == "y":
+        state.musicOn = True
+        typewriter("Background music has been enabled. You can disable it anytime by typing 'music off'.")
+    else:
+        state.musicOn = False
+        typewriter("Background music has been turned off. You can enable it anytime by typing 'music on'.")

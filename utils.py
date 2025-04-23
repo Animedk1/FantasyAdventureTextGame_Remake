@@ -163,3 +163,64 @@ def get_choice(valid_choices):
             return choice
         else:
             typewriter("Invalid choice. Try again.")
+
+# ───────────────────────────────────────────────
+# Game Over Function
+# ───────────────────────────────────────────────
+
+def game_over():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("\n\u001b[31m==== GAME OVER ====\u001b[0m\n")
+    time.sleep(1)
+
+    # Player Summary
+    print("\nFinal Stats:")
+    for stat, value in state.player["stats"].items():
+        print(f"  {stat.title()}: {value}")
+
+    # Inventory
+    if state.player["inventory"]:
+        print("\nInventory:")
+        for item in state.player["inventory"]:
+            print(f"  - {item}")
+    else:
+        print("\nInventory: Empty")
+
+    # Relationships
+    met_anyone = state.game_state.get("erena_met") or state.game_state.get("markus_met")
+    if met_anyone:
+        print("\nRelationships:")
+        if state.game_state.get("erena_met"):
+            print(f"  Erena: {state.player['relationships'].get('Erena', 0)}")
+        if state.game_state.get("markus_met"):
+            print(f"  Markus: {state.player['relationships'].get('Markus', 0)}")
+
+    # Key Choices (if tracked)
+    print("\nMajor Choices & Events:")
+    if state.game_state.get("met_mysterious_voice"):
+        print("- Encountered the Mysterious Voice")
+    if state.player["armored"]:
+        print("- Chose to wear the cursed armor")
+    else:
+        print("- Did not wear the armor")
+    if "Eldrich Plate Armour" in state.player["inventory"]:
+        print("- Found the Eldrich Plate Armour")
+
+    print("\nThank you for playing.\n")
+    time.sleep(2)
+
+    print("\nWould you like to return to the main menu?")
+    print("a) Restart Game")
+    print("b) Exit")
+
+    while True:
+        choice = input("→ ").lower()
+        if choice in ["a", "restart"]:
+            from backend import startMenu
+            startMenu()
+            break
+        elif choice in ["b", "exit"]:
+            sys.exit()
+        else:
+            print("Please choose a valid option.")
+

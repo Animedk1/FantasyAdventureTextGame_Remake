@@ -23,6 +23,7 @@ player = {
 # ───────────────────────────────────────────────
 game_state = {
     "met_mysterious_voice": False,
+    "met_mysterious_wind_voice": False,
     "has_cursed_item": False,
     "sided_with_faction": None,
     "chapter_events": {},
