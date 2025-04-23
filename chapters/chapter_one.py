@@ -73,7 +73,7 @@ def check_fire():
     time.sleep(0.3)
     typewriter("After inspecting the fire you see the snow is covering the remains of what looks like was once a campsite")
     time.sleep(0.3)
-    typewriter("Upon further inspection you can tell this place was abandoned some time ag...though exactly how long, you can't quite tell")
+    typewriter("Upon further inspection you can tell this place was abandoned some time ago...though exactly how long, you can't quite tell")
     time.sleep(0.3)
     #Notification Sound
     play_skill_gain_sound()
@@ -132,6 +132,7 @@ def Chapter_one_start():
     typewriter("You wake up sitting in front of the ashes of a recently lit campfire.")
     time.sleep(0.3)
     typewriter("Your memory is hazy.")
+    time.sleep(0.3)
     typewriter("Your back is pressed against a cold stone wall that once belonged to a small fortress within the land.")
     time.sleep(0.3)
     typewriter("Beside you lies your armour, in need of repair.\nBeside it is a sword with a faint red glow, buried in snow.")
