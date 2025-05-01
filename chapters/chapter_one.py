@@ -2,7 +2,8 @@ import time
 from state import player, game_state
 from utils import typewriter, clear_screen, get_choice
 from engine import unarmored_event
-from utils import play_skill_gain_sound, print_speaker
+from utils import play_skill_gain_sound, print_speaker, perform_save
+
 # ───────────────────────────────────────────────
 # Choice (1) functions
 # Notes:
@@ -52,7 +53,11 @@ def check_sword():
     clear_screen()
     typewriter("The world around you fades and you find yourself back in the snowy environment you were in before")
     time.sleep(0.5)
-
+    typewriter("The pain you previous felt has subsided and you now have full control of your body")
+    time.sleep(0.5)
+    typewriter("-- something shows you the way to the village")
+    time.sleep(0.5)
+    typewriter("You prepare to set off on the path to the village that was shown to you")
 
 def equip_armour():
     clear_screen()
@@ -69,6 +74,22 @@ def equip_armour():
     player["armored"] = True
     player["inventory"].append("Eldrich Plate Armour")
     check_sword()
+
+def equip_armour_after_Sword():
+    clear_screen()
+    typewriter("You grab the armour from the snow.")
+    time.sleep(0.3)
+    typewriter("Upon closer inspection, you realize you've never seen armor made of this material.")
+    time.sleep(0.3)
+    typewriter("When placing the armour on your body, you're met with a feeling of dread—a burning sensation courses through you.")
+    time.sleep(0.3)
+    typewriter("The armor begins to dissipates within your skin and a red symbol is burned into the palm of your hand")
+    time.sleep(0.3)
+    typewriter("Although the armor isn't visible you can still feel it's protection")
+    time.sleep(0.3)
+    player["armored"] = True
+    player["inventory"].append("Eldrich Plate Armour")
+    
 
 def check_fire():
     clear_screen()
@@ -91,7 +112,7 @@ def check_fire():
     check_sword()
 
 def equip_armor_scene_1():
-    typewriter("You look down at the armor laying in the snow and winder your next move...")
+    typewriter("You look down at the armor laying in the snow and think about your next move...")
     print("a) Equip the armour")
     print("b) Continue without it")
     print("(Type 'help' for command list)")
@@ -99,7 +120,7 @@ def equip_armor_scene_1():
     choice = get_choice(["a", "b"])
 
     if choice =="a":
-        equip_armour()
+        equip_armour_after_Sword()
         player["armored"] = True
         player["inventory"].append("Eldrich Plate Armour")
     elif choice == "b":
@@ -113,7 +134,22 @@ def travel_to_inn():
 
 
 def travel_to_tavern():
-    typewriter("")
+    typewriter("As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance")
+    time.sleep(0.3)
+    typewriter("You hear shouting as you approach")
+    time.sleep(1)
+    clear_screen()
+    print_speaker("Shouting Woman")
+    typewriter("I already told you didn't leave your shit in here dumbass. Now get the hell out of here, I've gotta open this place up in a few hours\nand I wouldn't mind just getting a little more sleep! ")
+    time.sleep(0.5)
+    print_speaker("Shouting Man")
+    typewriter("You piece of shit! I know you were in on it with that guy at the bar, you can't fool me! ")
+
+
+
+
+
+
 
 
 
@@ -122,17 +158,19 @@ def travel_to_tavern():
 
 
 # Game Narrative Start
-# ───────────
-# ───────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # Scene 1: 
 # - 
 # - Potential Skill Gains
 #   - +1 INT
 #   - +2 STR
-# ───────────────────────────────────────────────    
+# ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────    
 def Chapter_one_start():
     player["checkpoint"] = "chapter_one"
-
+    perform_save()
+    clear_screen()
+    time.sleep(0.3)
     typewriter("Prologue: Awakening")
     time.sleep(2)
     typewriter("You wake up sitting in front of the ashes of a recently lit campfire.")
@@ -176,7 +214,22 @@ def Chapter_one_start():
 
 
 def chapter_one_scene2():
-    typewriter("As you approach the village, ")
+    player["checkpoint"] = "chapter_two"
+    perform_save()
+    typewriter("You approach the village just as sun begins to peek above the sun.")
+    time.sleep(0.5)
+
+    print("a) travel to the Inn")
+    print("b) travel to the Tavern")
+    print("(Type 'help' for command list)")
+
+    choice = get_choice(["a", "b", "c"])
+
+    if choice == "a":
+        travel_to_inn()
+    elif choice == "b":
+        travel_to_tavern()
+
 
 # ───────────────────────────────────────────────
 # Scene 2: Story Branch - Bath house

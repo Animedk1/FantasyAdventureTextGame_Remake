@@ -224,3 +224,16 @@ def game_over():
         else:
             print("Please choose a valid option.")
 
+# ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# Perform Save - a workaround to avoid the circular import caused by importing save_game from backend into the chapter files
+# ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+def perform_save():
+    """
+    Safe wrapper to trigger save_game from backend without causing circular import issues.
+    """
+    try:
+        from backend import save_game
+        save_game()
+    except Exception as e:
+        typewriter(f"An error occurred while saving the game: {e}")
+

@@ -1,6 +1,6 @@
 import random
 import time
-from utils import typewriter, safe_input, clear_screen,print_speaker,game_over
+from utils import typewriter, safe_input, clear_screen,print_speaker,game_over, play_skill_gain_sound
 from state import player, game_state
 
 # ───────────────────────────────────────────────
@@ -20,9 +20,9 @@ def unarmored_event():
     clear_screen()
     game_state["met_mysterious__wind_voice"] = True
     print_speaker("Voices of the Wind")
-    typewriter("We shall not allow you past this point. The sword you carry is cursed and will only bring suffering to these Isles.")
+    typewriter("We shall not allow you past this point. The sword you carry is cursed and shall only bring suffering to these Isles.")
     time.sleep(1)
-    typewriter("WE MUST KILL YOU")
+    typewriter("WE MUST ELIMINATE YOU")
     time.sleep(3)
     clear_screen()
 
@@ -44,10 +44,13 @@ def unarmored_event():
         print_speaker("Mysterious Voice")
         typewriter("You were foolish to not wear what was given to you...")
         time.sleep(0.5)
-        typewriter("But perhaps you're foolishness proves something. (+2 Strength)")
+        typewriter("But perhaps you're foolishness proves something.") 
+        time.sleep(0.3)
+        play_skill_gain_sound()
+        typewriter("+2 Strength")
+        player["stats"]["strength"] += 2
         time.sleep(0.5)
         typewriter("While there are others, you are important to this. I've imprinted the armor into your soul. Do not continue to treat your life so carelessly")
-        player["stats"]["strength"] += 2
         player["armored"] = True
         player["inventory"].append("Eldrich Plate Armour")
 
