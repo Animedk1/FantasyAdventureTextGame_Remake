@@ -130,20 +130,86 @@ def equip_armor_scene_1():
 # Choice (2) functions
 # ───────────────────────────────────────────────
 def travel_to_inn():
+    player["checkpoint"] = "chapter_one_scene_2_Inn"
+    perform_save()
+    clear_screen()
+    time.sleep(0.5)
     typewriter("")
 
 
 def travel_to_tavern():
-    typewriter("As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance")
+    player["checkpoint"] = "chapter_one_scene_2_tavern"
+    perform_save()
+    clear_screen()
+    time.sleep(0.5)
+    typewriter("As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance.\n Above the door you see a brown haired woman leaning out the window.")
     time.sleep(0.3)
     typewriter("You hear shouting as you approach")
     time.sleep(1)
     clear_screen()
-    print_speaker("Shouting Woman")
-    typewriter("I already told you didn't leave your shit in here dumbass. Now get the hell out of here, I've gotta open this place up in a few hours\nand I wouldn't mind just getting a little more sleep! ")
+    print_speaker("Shouting Woman (From upper floor window)")
+    typewriter("I already told you to get the hell out of here, I've gotta open this place up in a few hours\nand I also wouldn't mind just getting a little more sleep! ")
     time.sleep(0.5)
     print_speaker("Shouting Man")
     typewriter("You piece of shit! I know you were in on it with that guy at the bar, you can't fool me! ")
+    time.sleep(0.5)
+    print_speaker("Shouting Woman")
+    typewriter("Don't blame your poor playing skills on me")
+    time.sleep(0.5)
+    print("Shouting Man")
+    typewriter("You know what, I'll be back, just you wait, i'm coming for you, that man, and my damn money")
+    time.sleep(0.5)
+    print_speaker("Shouting Woman")
+    typewriter("Yeah, I'm sure you will.")
+    time.sleep(0.5)
+    typewriter("I've had enough of this shit, I'm going back to sleep, Tavern opens in 3 hours now because of this fool")
+    time.sleep(2)
+    clear_screen()
+    typewriter("After witnessning that argument unfold in front of you, you hear an unfamiliar voice coming from behind you")
+    time.sleep(0.5)
+    print_speaker("Villager")
+    typewriter("I've never seen you around here before, we get vistors from time to time, but they usually don't look\nlike they've been though whatever Hell you've been through")
+    time.sleep(3)
+    clear_screen()
+    time.sleep(0.5)
+    typewriter("You look down and realize your clothes show sign of burns that could have been only cooled by the Icy winds from the moutains you traveld from")
+    time.sleep(0.5)
+
+    # ───────────────────────────────────────────────
+    # Chapter 1: Scene 2: Dialouge 1
+    # ───────────────────────────────────────────────
+    print_speaker("Villager")
+    typewriter("So I can't help but ask but..what the hell happened to you?")
+    
+    print("a) Tell him you're not sure what happened to you")
+    print("b) Tell him about your meeting with Viirish")
+
+    # Hidden option based on Intelligence
+    if player["stats"]["intelligence"] >= 7:
+        print("c) Explain you were on a cmaping trip that didn't go well. (Intelligence Requirement met: 7")
+    choice = get_choice(["a", "b", "c"] if player["stats"]["intelligence"] >= 7 else ["a", "b"])
+
+    if choice == "a":
+        typewriter("You walk past the man without saying a word. His eyes follow you, filled with suspicion.")
+    elif choice == "b":
+        time.sleep(0.3)
+        print_speaker("Villager")
+        typewriter("Viirish? That's a name I haven't heard for a while.")
+        time.sleep(0.3)
+        typewriter("")
+        time.sleep(0.3)
+        typewriter("You definetly might not want to mention that name around here, I was only just being born at the time\nbut there are some people around here old enough to remember those days")
+    elif choice == "c":
+        typewriter("You tell him what little you know — the fortress, the cold, the voice.")
+        typewriter("His eyes widen slightly, and his tone softens.")
+        typewriter("Villager: Huh... maybe you're the one they talked about in the old stories.")
+        player["stats"]["intelligence"] += 1
+        play_skill_gain_sound()
+        typewriter("(+1 Intelligence)")
+    # ───────────────────────────────────────────────
+    # Chapter 1: Scene 2: Dialouge 1
+    # ───────────────────────────────────────────────
+
 
 
 
@@ -214,7 +280,7 @@ def Chapter_one_start():
 
 
 def chapter_one_scene2():
-    player["checkpoint"] = "chapter_two"
+    player["checkpoint"] = "chapter_one_scene_2"
     perform_save()
     typewriter("You approach the village just as sun begins to peek above the sun.")
     time.sleep(0.5)

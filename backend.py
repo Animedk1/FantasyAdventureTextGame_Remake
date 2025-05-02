@@ -3,7 +3,7 @@ import json
 import time
 import state
 from utils import typewriter, clear_screen, safe_input
-from chapters.chapter_one import Chapter_one_start
+from chapters.chapter_one import Chapter_one_start, chapter_one_scene2,travel_to_inn,travel_to_tavern
 #from config import DEV_MODE
 
 # ───────────────────────────────────────────────
@@ -58,6 +58,13 @@ def resume_checkpoint(point):
         gameIntro()
     elif point == "chapter_one":
         Chapter_one_start()
+    elif point == "chapter_one_scene_2":
+        chapter_one_scene2()
+    elif point == "chapter_one_scene_2_Inn":
+        travel_to_inn()
+    elif point == "chapter_one_scene_2_tavern":
+        travel_to_tavern()
+    
     else:
         typewriter("Unknown checkpoint. Starting from the beginning...")
         gameIntro()
