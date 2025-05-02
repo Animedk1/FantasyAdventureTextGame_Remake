@@ -185,9 +185,9 @@ def travel_to_tavern():
     print("b) Tell him about your meeting with Viirish")
 
     # Hidden option based on Intelligence
-    if player["stats"]["intelligence"] >= 7:
-        print("c) Explain you were on a cmaping trip that didn't go well. (Intelligence Requirement met: 7")
-    choice = get_choice(["a", "b", "c"] if player["stats"]["intelligence"] >= 7 else ["a", "b"])
+    if player["stats"]["intelligence"] >= 6:
+        print("c) Explain you were on a cmaping trip that didn't go well. (Intelligence Requirement met: 6)")
+    choice = get_choice(["a", "b", "c"] if player["stats"]["intelligence"] >= 6 else ["a", "b"])
 
     if choice == "a":
         typewriter("You walk past the man without saying a word. His eyes follow you, filled with suspicion.")
