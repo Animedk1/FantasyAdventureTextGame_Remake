@@ -134,7 +134,8 @@ def travel_to_inn():
     perform_save()
     clear_screen()
     time.sleep(0.5)
-    typewriter("")
+    typewriter("As you walk into the town exhausted you come across and INN that appears to be open")
+    time.sleep(0.5)
 
 
 def travel_to_tavern():
@@ -142,7 +143,7 @@ def travel_to_tavern():
     perform_save()
     clear_screen()
     time.sleep(0.5)
-    typewriter("As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance.\n Above the door you see a brown haired woman leaning out the window.")
+    typewriter("As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance.\nAbove the door you see a brown haired woman leaning out the window.")
     time.sleep(0.3)
     typewriter("You hear shouting as you approach")
     time.sleep(1)
@@ -156,7 +157,7 @@ def travel_to_tavern():
     print_speaker("Shouting Woman")
     typewriter("Don't blame your poor playing skills on me")
     time.sleep(0.5)
-    print("Shouting Man")
+    print_speaker("Shouting Man")
     typewriter("You know what, I'll be back, just you wait, i'm coming for you, that man, and my damn money")
     time.sleep(0.5)
     print_speaker("Shouting Woman")
@@ -186,32 +187,55 @@ def travel_to_tavern():
 
     # Hidden option based on Intelligence
     if player["stats"]["intelligence"] >= 6:
-        print("c) Explain you were on a cmaping trip that didn't go well. (Intelligence Requirement met: 6)")
+        print("c) Explain you were on a camping trip that didn't go well. (Intelligence Requirement met: 6)")
     choice = get_choice(["a", "b", "c"] if player["stats"]["intelligence"] >= 6 else ["a", "b"])
 
     if choice == "a":
-        typewriter("You walk past the man without saying a word. His eyes follow you, filled with suspicion.")
+        print_speaker("Villager")
+        typewriter("Strange...")
+        time.sleep(0.3)
+        typewriter("But I'm not judging, I've definetly had my days of waking up in the woods drunk off my ass so I get you")
+        time.sleep(0.3)
+        clear_screen()
+        time.sleep(0.3)
     elif choice == "b":
         time.sleep(0.3)
         print_speaker("Villager")
-        typewriter("Viirish? That's a name I haven't heard for a while.")
+        typewriter("Viirish? I can't say that name has too much meaning to me, but I have read ")
         time.sleep(0.3)
-        typewriter("")
+        typewriter("Alderos has watched over us since I was born though")
         time.sleep(0.3)
         typewriter("You definetly might not want to mention that name around here, I was only just being born at the time\nbut there are some people around here old enough to remember those days")
+        time.sleep(0.3)
+        clear_screen()
+        time.sleep(0.3)
     elif choice == "c":
+        print("")
         typewriter("You tell him what little you know — the fortress, the cold, the voice.")
-        typewriter("His eyes widen slightly, and his tone softens.")
-        typewriter("Villager: Huh... maybe you're the one they talked about in the old stories.")
-        player["stats"]["intelligence"] += 1
-        play_skill_gain_sound()
-        typewriter("(+1 Intelligence)")
+
     # ───────────────────────────────────────────────
     # Chapter 1: Scene 2: Dialouge 1
     # ───────────────────────────────────────────────
-
-
-
+    print_speaker("Villager")
+    typewriter("Name's Peter, what should I call you?")
+    time.sleep(2)
+    typewriter("You")
+    time.sleep(0.3)
+    name = player["name"] or "stranger"
+    typewriter(f"{name}...My name is {name}'")
+    time.sleep(0.3)
+    print_speaker("Peter")
+    typewriter(f"Well good to meet you {name}.")
+    time.sleep(0.3)
+    typewriter("I'm assuming you probably haven't eatin in a while either, if you want we can head inside the tavern")
+    time.sleep(0.3)
+    typewriter("My older sister Erena owns the place so we kinda have free reign there. I'll introduce you")
+    time.sleep(5)
+    clear_screen()
+    typewriter("You and Peter walk into the tavern and walk toward the kitchen")
+    time.sleep(0.5)
+    #Rewrite this and add more visual description to ground the user in the environment
+    
 
 
 

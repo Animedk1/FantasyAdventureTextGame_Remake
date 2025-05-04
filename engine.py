@@ -7,6 +7,7 @@ from state import player, game_state
 # ONE-TIME RANDOM EVENTS
 # ───────────────────────────────────────────────
 
+# Unarmored Event
 def unarmored_event():
     """
     Triggered in Chapter 1 if the player does NOT equip the armor.
@@ -54,6 +55,14 @@ def unarmored_event():
         player["armored"] = True
         player["inventory"].append("Eldrich Plate Armour")
 
+# Drink at Bar Elena Event (Tavern option)
+def bar_Scene_Tavern_Route():
+    typewriter("")
+    time.sleep(0.5)
+    typewriter("")
+
+
+  
 
 # ───────────────────────────────────────────────
 # SHOP SYSTEM
@@ -118,3 +127,4 @@ def modify_relationship(name: str, value: int):
         typewriter(f"{name}'s bond is now {player['relationships'][name]}/100.")
     else:
         typewriter(f"Relationship with {name} does not exist.")
+
