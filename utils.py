@@ -21,11 +21,35 @@ def play_skill_gain_sound():
 
 
 # Load background music
-pygame.mixer.music.load("audio/bgmusic.mp3")  # ← Replace with your actual music file
-pygame.mixer.music.set_volume(0.3)
+pygame.mixer.music.load("audio/bgmusic_prologue.mp3")  # ← Replace with your actual music file
+pygame.mixer.music.set_volume(0.9)
 
 if state.musicOn:
     pygame.mixer.music.play(-1)  # Loop forever
+
+#Next_track_Function
+def switch_music(new_track_path, fadeout_time=2000, volume=0.4):
+    """Fade out current music, then load and play a new track."""
+    try:
+        pygame.mixer.music.fadeout(fadeout_time)
+        time.sleep(fadeout_time / 1000)  # Convert ms to seconds
+
+        pygame.mixer.music.load(new_track_path)
+        pygame.mixer.music.set_volume(volume)
+        pygame.mixer.music.play(-1)
+    except Exception as e:
+        print(f"Error switching music: {e}")
+
+#Checkpoint Music Map
+checkpoint_music_map = {
+    "intro": "audio/bgmusic_prologue.mp3",
+    "chapter_one": "audio/bgmusic_prologue.mp3",
+    "chapter_one_scene_2": "audio/bgmusic_village.mp3",
+    "chapter_one_scene_2_Inn": "audio/bgmusic_village.mp3",
+    "chapter_one_scene_2_tavern": "audio/bgmusic_village.mp3",   
+}
+
+
 
 # Load typing sounds
 typing_sounds = [

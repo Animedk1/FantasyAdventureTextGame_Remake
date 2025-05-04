@@ -2,7 +2,7 @@ import os
 import json
 import time
 import state
-from utils import typewriter, clear_screen, safe_input
+from utils import typewriter, clear_screen, safe_input, switch_music, checkpoint_music_map
 from chapters.chapter_one import Chapter_one_start, chapter_one_scene2,travel_to_inn,travel_to_tavern
 #from config import DEV_MODE
 
@@ -54,6 +54,11 @@ def delete_save():
         typewriter("No save file found to delete.")
 
 def resume_checkpoint(point):
+    # Set music based on checkpoint
+    if point in checkpoint_music_map:
+        switch_music(checkpoint_music_map[point])
+
+    #Resume Story Based on checkpoint
     if point == "intro":
         gameIntro()
     elif point == "chapter_one":

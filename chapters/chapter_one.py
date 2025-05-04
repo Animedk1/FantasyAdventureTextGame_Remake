@@ -2,7 +2,7 @@ import time
 from state import player, game_state
 from utils import typewriter, clear_screen, get_choice
 from engine import unarmored_event
-from utils import play_skill_gain_sound, print_speaker, perform_save
+from utils import play_skill_gain_sound, print_speaker, perform_save,switch_music
 
 # ───────────────────────────────────────────────
 # Choice (1) functions
@@ -304,6 +304,7 @@ def Chapter_one_start():
 
 
 def chapter_one_scene2():
+    switch_music("audio/chapter_two_theme.mp3", fadeout_time=2000)
     player["checkpoint"] = "chapter_one_scene_2"
     perform_save()
     typewriter("You approach the village just as sun begins to peek above the sun.")
