@@ -27,27 +27,47 @@ pygame.mixer.music.set_volume(0.9)
 if state.musicOn:
     pygame.mixer.music.play(-1)  # Loop forever
 
-#Next_track_Function
-def switch_music(new_track_path, fadeout_time=2000, volume=0.4):
-    """Fade out current music, then load and play a new track."""
-    try:
-        pygame.mixer.music.fadeout(fadeout_time)
-        time.sleep(fadeout_time / 1000)  # Convert ms to seconds
+import pygame
+import state
 
-        pygame.mixer.music.load(new_track_path)
-        pygame.mixer.music.set_volume(volume)
-        pygame.mixer.music.play(-1)
-    except Exception as e:
-        print(f"Error switching music: {e}")
-
-#Checkpoint Music Map
+# Assume pygame.mixer.init() has already been called earlier
 checkpoint_music_map = {
-    "intro": "audio/bgmusic_prologue.mp3",
-    "chapter_one": "audio/bgmusic_prologue.mp3",
-    "chapter_one_scene_2": "audio/bgmusic_village.mp3",
-    "chapter_one_scene_2_Inn": "audio/bgmusic_village.mp3",
-    "chapter_one_scene_2_tavern": "audio/bgmusic_village.mp3",   
+    "intro": {
+        "file": "audio/bgmusic_prologue.mp3",
+        "volume": 0.8
+    },
+    "chapter_one": {
+        "file": "audio/bgmusic_prologue.mp3",
+        "volume": 0.8
+    },
+    "chapter_one_scene_2": {
+        "file": "audio/bgmusic_village.mp3",
+        "volume": 0.3
+    },
+    "chapter_one_scene_2_Inn": {
+        "file": "audio/bgmusic_village.mp3",
+        "volume": 0.3
+    },
+    "chapter_one_scene_2_tavern": {
+        "file": "audio/bgmusic_village.mp3",
+        "volume": 0.3
+    }
 }
+
+def switch_music(checkpoint, fadeout_time=1000):
+    if not state.musicOn:
+        return  # User disabled music
+
+    track_info = checkpoint_music_map.get(checkpoint)
+
+    if track_info:
+        try:
+            pygame.mixer.music.fadeout(fadeout_time)  # Fade out over 1 second
+            pygame.mixer.music.load(track_info["file"])
+            pygame.mixer.music.set_volume(track_info["volume"])
+            pygame.mixer.music.play(-1)  # Loop indefinitely
+        except Exception as e:
+            print(f"Error switching music for checkpoint {checkpoint}: {e}")
 
 
 
@@ -61,6 +81,14 @@ typing_sounds = [
 ]
 
 def typewriter(text, delay=0.05):
+
+    if text.strip():  # Avoid logging blank lines
+        state.dialogue_log.append(text)
+        # Keep only the last 15 entries
+        if len(state.dialogue_log) > 15:
+            state.dialogue_log.pop(0)
+
+
     for char in text:
         if state.soundOP:
             sound = random.choice(typing_sounds)

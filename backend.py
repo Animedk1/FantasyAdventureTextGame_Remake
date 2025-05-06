@@ -55,8 +55,7 @@ def delete_save():
 
 def resume_checkpoint(point):
     # Set music based on checkpoint
-    if point in checkpoint_music_map:
-        switch_music(checkpoint_music_map[point])
+    switch_music(point)
 
     #Resume Story Based on checkpoint
     if point == "intro":

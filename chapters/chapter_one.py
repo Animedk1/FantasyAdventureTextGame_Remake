@@ -27,7 +27,7 @@ def check_sword():
     typewriter("Before you can bring yourself to investigate you hear a powerful forboding voice coming from the sky.")
     time.sleep(2)
     typewriter("You try to collect yourself, but find that you are unable to move")
-    time.sleep(1)
+    time.sleep(5)
     clear_screen()
     game_state["met_mysterious_voice"] = True
     print_speaker("Mysterious Voice")
@@ -45,7 +45,7 @@ def check_sword():
     typewriter("Take the sword I've given you to the capital city of Aedros")
     time.sleep(0.5)
     typewriter("You are not my only chosen, but you are important. If you value your life and the lives of those you will soon meet, I caution you to take this task seriously ")
-    time.sleep(2)
+    time.sleep(5)
     clear_screen()
     print_speaker("Mysterious Voice")
     typewriter("Do not disappointment by being as disposable as the rest")
@@ -146,7 +146,7 @@ def travel_to_tavern():
     typewriter("As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance.\nAbove the door you see a brown haired woman leaning out the window.")
     time.sleep(0.3)
     typewriter("You hear shouting as you approach")
-    time.sleep(1)
+    time.sleep(5)
     clear_screen()
     print_speaker("Shouting Woman (From upper floor window)")
     typewriter("I already told you to get the hell out of here, I've gotta open this place up in a few hours\nand I also wouldn't mind just getting a little more sleep! ")
@@ -164,13 +164,13 @@ def travel_to_tavern():
     typewriter("Yeah, I'm sure you will.")
     time.sleep(0.5)
     typewriter("I've had enough of this shit, I'm going back to sleep, Tavern opens in 3 hours now because of this fool")
-    time.sleep(2)
+    time.sleep(5)
     clear_screen()
     typewriter("After witnessning that argument unfold in front of you, you hear an unfamiliar voice coming from behind you")
     time.sleep(0.5)
     print_speaker("Villager")
     typewriter("I've never seen you around here before, we get vistors from time to time, but they usually don't look\nlike they've been though whatever Hell you've been through")
-    time.sleep(3)
+    time.sleep(5)
     clear_screen()
     time.sleep(0.5)
     typewriter("You look down and realize your clothes show sign of burns that could have been only cooled by the Icy winds from the moutains you traveld from")
@@ -195,7 +195,7 @@ def travel_to_tavern():
         typewriter("Strange...")
         time.sleep(0.3)
         typewriter("But I'm not judging, I've definetly had my days of waking up in the woods drunk off my ass so I get you")
-        time.sleep(0.3)
+        time.sleep(5)
         clear_screen()
         time.sleep(0.3)
     elif choice == "b":
@@ -206,7 +206,7 @@ def travel_to_tavern():
         typewriter("Alderos has watched over us since I was born though")
         time.sleep(0.3)
         typewriter("You definetly might not want to mention that name around here, I was only just being born at the time\nbut there are some people around here old enough to remember those days")
-        time.sleep(0.3)
+        time.sleep(5)
         clear_screen()
         time.sleep(0.3)
     elif choice == "c":
@@ -235,8 +235,9 @@ def travel_to_tavern():
     typewriter("You and Peter walk into the tavern and walk toward the kitchen")
     time.sleep(0.5)
     #Rewrite this and add more visual description to ground the user in the environment
-    
-
+    typewriter("The place looks a bit rundown, but the decor creates a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity")
+    time.sleep(1)
+    typewriter
 
 
 
@@ -304,7 +305,7 @@ def Chapter_one_start():
 
 
 def chapter_one_scene2():
-    switch_music("audio/chapter_two_theme.mp3", fadeout_time=2000)
+    switch_music("audio/bgmusic_village.mp3", fadeout_time=2000)
     player["checkpoint"] = "chapter_one_scene_2"
     perform_save()
     typewriter("You approach the village just as sun begins to peek above the sun.")

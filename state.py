@@ -41,3 +41,8 @@ game_state = {
 
 soundOP = True  # Default: sound is ON
 musicOn = True # Default: Music is on
+
+# ───────────────────────────────────────────────
+# Dialouge_Log State
+# ───────────────────────────────────────────────
+dialouge_log = []
