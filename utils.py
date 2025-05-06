@@ -217,7 +217,9 @@ def get_choice(valid_choices):
             return choice
         elif choice in ["log", "history"]:
             print("\n\u001b[36m--- Recent Dialogue ---\u001b[0m")
-            print("\n".join(state.dialogue_log))
+            for entry in state.dialogue_log:
+                print(entry)
+                print()  # adds blank line between entries
             print("\n(Type your choice again below.)")
 
 
@@ -297,3 +299,34 @@ def perform_save():
     except Exception as e:
         typewriter(f"An error occurred while saving the game: {e}")
 
+# ─────────────────────────────────────────────────────────────────────────────────────────────
+# Say Function - combines print_speaker and typewriter for cleaner code
+# ─────────────────────────────────────────────────────────────────────────────────────────────
+
+def say(text, speaker=None):
+    # Determine label and log name
+    if speaker:
+        label = f"\u001b[33m{speaker}:\u001b[0m"  # Yellow for characters
+        log_name = f"\u001b[33m{speaker}:\u001b[0m"
+    else:
+        label = "\u001b[35mNarrator:\u001b[0m"    # Purple for narrator
+        log_name = f"\u001b[35mNarrator:\u001b[0m"
+
+    # Print to screen
+    print(f"\n{label}")
+    typewriter(text)
+
+    # Prepare single-line log entry with color
+    collapsed_text = text.replace("\n", " ").strip()
+    log_entry = f"{log_name} {collapsed_text}\n"
+
+    state.dialogue_log.append(log_entry)
+
+    if len(state.dialogue_log) > 30:
+        state.dialogue_log.pop(0)
+
+def show_log():
+    print("\n\u001b[36m--- Dialogue Log ---\u001b[0m\n")
+    for entry in state.dialogue_log:
+        print(entry)
+        print()  # Adds a blank line between each entry

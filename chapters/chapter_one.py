@@ -1,6 +1,6 @@
 import time
 from state import player, game_state
-from utils import typewriter, clear_screen, get_choice
+from utils import typewriter, clear_screen, get_choice, say
 from engine import unarmored_event
 from utils import play_skill_gain_sound, print_speaker, perform_save,switch_music
 
@@ -12,119 +12,124 @@ from utils import play_skill_gain_sound, print_speaker, perform_save,switch_musi
 
 def check_sword():
     clear_screen()
-    typewriter("As you reach out to grab the sword from the snow, you feel a sharp pain in your chest")
+    say("As you reach out to grab the sword from the snow, you feel a sharp pain in your chest")
     time.sleep(0.3)
-    typewriter("The sensation is so strong it brings you to your knees")
+    say("The sensation is so strong it brings you to your knees")
     time.sleep(0.3)
-    typewriter("As you look up from staring down at the ground you realize the feeling of the bitter cold has dissipated... ")
+    say("As you look up from staring down at the ground you realize the feeling of the bitter cold has dissipated... ")
     time.sleep(0.3)
-    typewriter("The world in front of you has changed.")
+    say("The world in front of you has changed.")
     time.sleep(0.3)
-    typewriter("A blood red hue covers the sky and you find yourself standing atop a tower built of the a dark unknown material. ")
+    say("A blood red hue covers the sky and you find yourself standing atop a tower built of a dark unknown material.")
     time.sleep(0.3)
-    typewriter("Behind you is a sealed door.")
+    say("Behind you is a sealed door.")
     time.sleep(0.3)
-    typewriter("Before you can bring yourself to investigate you hear a powerful forboding voice coming from the sky.")
+    say("Before you can bring yourself to investigate you hear a powerful forboding voice coming from the sky.")
     time.sleep(2)
-    typewriter("You try to collect yourself, but find that you are unable to move")
+    say("You try to collect yourself, but find that you are unable to move")
     time.sleep(5)
+
     clear_screen()
     game_state["met_mysterious_voice"] = True
-    print_speaker("Mysterious Voice")
     time.sleep(1)
-    typewriter("Your time is short here so listen.")
-    time.sleep(0.5)
-    typewriter("You will understand with time but you are not the first to have been gifted with my power.")
-    time.sleep(0.5)
-    typewriter("We shall hope you will be the last")
-    time.sleep(0.5)
-    typewriter("A plague has spread throughout the isles from which you hail. So far as to reach within my domain")
-    time.sleep(0.5)
-    typewriter("The isles must burn and you need to be the one to ignite the flame")
-    time.sleep(0.5)
-    typewriter("Take the sword I've given you to the capital city of Aedros")
-    time.sleep(0.5)
-    typewriter("You are not my only chosen, but you are important. If you value your life and the lives of those you will soon meet, I caution you to take this task seriously ")
+
+    say(
+        "Your time is short here so listen.\n"
+        "You will understand with time but you are not the first to have been gifted with my power.\n"
+        "We shall hope you will be the last.\n"
+        "A plague has spread throughout the isles from which you hail. So far as to reach within my domain.\n"
+        "The isles must burn and you need to be the one to ignite the flame.\n"
+        "Take the sword I've given you to the capital city of Aedros.\n"
+        "You are not my only chosen, but you are important. If you value your life and the lives of those you will soon meet, I caution you to take this task seriously.",
+        speaker="Mysterious Voice"
+    )
+
     time.sleep(5)
     clear_screen()
-    print_speaker("Mysterious Voice")
-    typewriter("Do not disappointment by being as disposable as the rest")
+
+    say("Do not disappointment by being as disposable as the rest", speaker="Mysterious Voice")
     time.sleep(4)
+
     clear_screen()
-    typewriter("The world around you fades and you find yourself back in the snowy environment you were in before")
+    say("The world around you fades and you find yourself back in the snowy environment you were in before")
     time.sleep(0.5)
-    typewriter("The pain you previous felt has subsided and you now have full control of your body")
+    say("The pain you previously felt has subsided and you now have full control of your body")
     time.sleep(0.5)
-    typewriter("-- something shows you the way to the village")
+    say("-- something shows you the way to the village")
     time.sleep(0.5)
-    typewriter("You prepare to set off on the path to the village that was shown to you")
+    say("You prepare to set off on the path to the village that was shown to you")
+
 
 def equip_armour():
     clear_screen()
-    typewriter("You grab the armour from the snow.")
+    say("You grab the armour from the snow.")
     time.sleep(0.3)
-    typewriter("Upon closer inspection, you realize you've never seen armor made of this material.")
+    say("Upon closer inspection, you realize you've never seen armor made of this material.")
     time.sleep(0.3)
-    typewriter("When placing the armour on your body, you're met with a feeling of dread—a burning sensation courses through you.")
+    say("When placing the armour on your body, you're met with a feeling of dread—a burning sensation courses through you.")
     time.sleep(0.3)
-    typewriter("The armor begins to dissipates within your skin and a red symbol is burned into the palm of your hand")
+    say("The armor begins to dissipates within your skin and a red symbol is burned into the palm of your hand")
     time.sleep(0.3)
-    typewriter("Although the armor isn't visible you can still feel it's protection")
+    say("Although the armor isn't visible you can still feel it's protection")
     time.sleep(0.3)
     player["armored"] = True
     player["inventory"].append("Eldrich Plate Armour")
     check_sword()
 
+
 def equip_armour_after_Sword():
     clear_screen()
-    typewriter("You grab the armour from the snow.")
+    say("You grab the armour from the snow.")
     time.sleep(0.3)
-    typewriter("Upon closer inspection, you realize you've never seen armor made of this material.")
+    say("Upon closer inspection, you realize you've never seen armor made of this material.")
     time.sleep(0.3)
-    typewriter("When placing the armour on your body, you're met with a feeling of dread—a burning sensation courses through you.")
+    say("When placing the armour on your body, you're met with a feeling of dread—a burning sensation courses through you.")
     time.sleep(0.3)
-    typewriter("The armor begins to dissipates within your skin and a red symbol is burned into the palm of your hand")
+    say("The armor begins to dissipates within your skin and a red symbol is burned into the palm of your hand")
     time.sleep(0.3)
-    typewriter("Although the armor isn't visible you can still feel it's protection")
+    say("Although the armor isn't visible you can still feel it's protection")
     time.sleep(0.3)
     player["armored"] = True
     player["inventory"].append("Eldrich Plate Armour")
-    
+
 
 def check_fire():
     clear_screen()
-    typewriter("You lean down and check the fire.")
+    say("You lean down and check the fire.")
     time.sleep(0.3)
-    typewriter("It's too far gone. The embers are cold and dead.")
+    say("It's too far gone. The embers are cold and dead.")
     time.sleep(0.3)
-    typewriter("After inspecting the fire you see the snow is covering the remains of what looks like was once a campsite")
+    say("After inspecting the fire you see the snow is covering the remains of what looks like was once a campsite")
     time.sleep(0.3)
-    typewriter("Upon further inspection you can tell this place was abandoned some time ago...though exactly how long, you can't quite tell")
+    say("Upon further inspection you can tell this place was abandoned some time ago...though exactly how long, you can't quite tell")
     time.sleep(0.3)
-    #Notification Sound
+
+    # Notification Sound
     play_skill_gain_sound()
-    typewriter("(+1 intelligence)")
+    say("(+1 intelligence)")
     player["stats"]["intelligence"] += 1
-    typewriter("While taking in the environment around you, you hear a feint noise that echoes that of a whisper.")
+
+    say("While taking in the environment around you, you hear a feint noise that echoes that of a whisper.")
     time.sleep(0.3)
-    typewriter("Upon further inspection, you notice it's the sword.")
+    say("Upon further inspection, you notice it's the sword.")
     time.sleep(1)
     check_sword()
 
 def equip_armor_scene_1():
-    typewriter("You look down at the armor laying in the snow and think about your next move...")
+    say("You look down at the armor laying in the snow and think about your next move...")
     print("a) Equip the armour")
     print("b) Continue without it")
     print("(Type 'help' for command list)")
 
     choice = get_choice(["a", "b"])
 
-    if choice =="a":
+    if choice == "a":
         equip_armour_after_Sword()
         player["armored"] = True
         player["inventory"].append("Eldrich Plate Armour")
     elif choice == "b":
-        typewriter("You've chosen to leave the armor behind")
+        say("You've chosen to leave the armor behind")
+
 
 # ───────────────────────────────────────────────
 # Choice (2) functions
@@ -134,7 +139,7 @@ def travel_to_inn():
     perform_save()
     clear_screen()
     time.sleep(0.5)
-    typewriter("As you walk into the town exhausted you come across and INN that appears to be open")
+    say("As you walk into the town exhausted you come across and INN that appears to be open")
     time.sleep(0.5)
 
 
@@ -143,101 +148,97 @@ def travel_to_tavern():
     perform_save()
     clear_screen()
     time.sleep(0.5)
-    typewriter("As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance.\nAbove the door you see a brown haired woman leaning out the window.")
+    say("As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance.\nAbove the door you see a brown haired woman leaning out the window.")
     time.sleep(0.3)
-    typewriter("You hear shouting as you approach")
+    say("You hear shouting as you approach")
     time.sleep(5)
+
     clear_screen()
-    print_speaker("Shouting Woman (From upper floor window)")
-    typewriter("I already told you to get the hell out of here, I've gotta open this place up in a few hours\nand I also wouldn't mind just getting a little more sleep! ")
+    say("I already told you to get the hell out of here, I've gotta open this place up in a few hours\nand I also wouldn't mind just getting a little more sleep!", speaker="Shouting Woman (From upper floor window)")
     time.sleep(0.5)
-    print_speaker("Shouting Man")
-    typewriter("You piece of shit! I know you were in on it with that guy at the bar, you can't fool me! ")
+    say("You piece of shit! I know you were in on it with that guy at the bar, you can't fool me!", speaker="Shouting Man")
     time.sleep(0.5)
-    print_speaker("Shouting Woman")
-    typewriter("Don't blame your poor playing skills on me")
+    say("Don't blame your poor playing skills on me", speaker="Shouting Woman")
     time.sleep(0.5)
-    print_speaker("Shouting Man")
-    typewriter("You know what, I'll be back, just you wait, i'm coming for you, that man, and my damn money")
+    say("You know what, I'll be back, just you wait, I'm coming for you, that man, and my damn money", speaker="Shouting Man")
     time.sleep(0.5)
-    print_speaker("Shouting Woman")
-    typewriter("Yeah, I'm sure you will.")
+    say("Yeah, I'm sure you will.", speaker="Shouting Woman")
     time.sleep(0.5)
-    typewriter("I've had enough of this shit, I'm going back to sleep, Tavern opens in 3 hours now because of this fool")
+    say("I've had enough of this shit, I'm going back to sleep, Tavern opens in 3 hours now because of this fool", speaker="Shouting Woman")
     time.sleep(5)
+
     clear_screen()
-    typewriter("After witnessning that argument unfold in front of you, you hear an unfamiliar voice coming from behind you")
+    say("After witnessning that argument unfold in front of you, you hear an unfamiliar voice coming from behind you")
     time.sleep(0.5)
-    print_speaker("Villager")
-    typewriter("I've never seen you around here before, we get vistors from time to time, but they usually don't look\nlike they've been though whatever Hell you've been through")
+
+    say("I've never seen you around here before, we get vistors from time to time, but they usually don't look\nlike they've been though whatever Hell you've been through", speaker="Villager")
     time.sleep(5)
+
     clear_screen()
     time.sleep(0.5)
-    typewriter("You look down and realize your clothes show sign of burns that could have been only cooled by the Icy winds from the moutains you traveld from")
+    say("You look down and realize your clothes show sign of burns that could have been only cooled by the Icy winds from the moutains you traveld from")
     time.sleep(0.5)
 
     # ───────────────────────────────────────────────
-    # Chapter 1: Scene 2: Dialouge 1
+    # Chapter 1: Scene 2: Dialogue 1
     # ───────────────────────────────────────────────
-    print_speaker("Villager")
-    typewriter("So I can't help but ask but..what the hell happened to you?")
-    
+    say("So I can't help but ask but..what the hell happened to you?", speaker="Villager")
+
     print("a) Tell him you're not sure what happened to you")
     print("b) Tell him about your meeting with Viirish")
 
     # Hidden option based on Intelligence
     if player["stats"]["intelligence"] >= 6:
         print("c) Explain you were on a camping trip that didn't go well. (Intelligence Requirement met: 6)")
+
     choice = get_choice(["a", "b", "c"] if player["stats"]["intelligence"] >= 6 else ["a", "b"])
 
     if choice == "a":
-        print_speaker("Villager")
-        typewriter("Strange...")
+        say("Strange...", speaker="Villager")
         time.sleep(0.3)
-        typewriter("But I'm not judging, I've definetly had my days of waking up in the woods drunk off my ass so I get you")
+        say("But I'm not judging, I've definetly had my days of waking up in the woods drunk off my ass so I get you", speaker="Villager")
         time.sleep(5)
         clear_screen()
         time.sleep(0.3)
+
     elif choice == "b":
         time.sleep(0.3)
-        print_speaker("Villager")
-        typewriter("Viirish? I can't say that name has too much meaning to me, but I have read ")
+        say("Viirish? I can't say that name has too much meaning to me, but I have read", speaker="Villager")
         time.sleep(0.3)
-        typewriter("Alderos has watched over us since I was born though")
+        say("Alderos has watched over us since I was born though", speaker="Villager")
         time.sleep(0.3)
-        typewriter("You definetly might not want to mention that name around here, I was only just being born at the time\nbut there are some people around here old enough to remember those days")
+        say("You definetly might not want to mention that name around here, I was only just being born at the time\nbut there are some people around here old enough to remember those days", speaker="Villager")
         time.sleep(5)
         clear_screen()
         time.sleep(0.3)
-    elif choice == "c":
-        print("")
-        typewriter("You tell him what little you know — the fortress, the cold, the voice.")
 
-    # ───────────────────────────────────────────────
-    # Chapter 1: Scene 2: Dialouge 1
-    # ───────────────────────────────────────────────
-    print_speaker("Villager")
-    typewriter("Name's Peter, what should I call you?")
+    elif choice == "c":
+        say("You tell him what little you know — the fortress, the cold, the voice.")
+
+    # Continue Scene
+    say("Name's Peter, what should I call you?", speaker="Villager")
     time.sleep(2)
-    typewriter("You")
+    say("You scramble to remeber your name")
     time.sleep(0.3)
     name = player["name"] or "stranger"
-    typewriter(f"{name}...My name is {name}'")
+    say(f"{name}...My name is {name}'", speaker=f"{name}")
     time.sleep(0.3)
-    print_speaker("Peter")
-    typewriter(f"Well good to meet you {name}.")
+
+    say(f"Well good to meet you {name}.", speaker="Peter")
     time.sleep(0.3)
-    typewriter("I'm assuming you probably haven't eatin in a while either, if you want we can head inside the tavern")
+    say("I'm assuming you probably haven't eatin in a while either, if you want we can head inside the tavern", speaker="Peter")
     time.sleep(0.3)
-    typewriter("My older sister Erena owns the place so we kinda have free reign there. I'll introduce you")
+    say("My older sister Erena owns the place so we kinda have free reign there. I'll introduce you", speaker="Peter")
     time.sleep(5)
+
     clear_screen()
-    typewriter("You and Peter walk into the tavern and walk toward the kitchen")
+    say("You and Peter walk into the tavern and walk toward the kitchen")
     time.sleep(0.5)
-    #Rewrite this and add more visual description to ground the user in the environment
-    typewriter("The place looks a bit rundown, but the decor creates a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity")
+    # Rewrite note preserved
+    say("The place looks a bit rundown, but the decor creates a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity")
     time.sleep(1)
-    typewriter("As yo")
+    say("As yo")  # Original partial line preserved for you to complete later
+
 
 
 
@@ -262,19 +263,20 @@ def Chapter_one_start():
     perform_save()
     clear_screen()
     time.sleep(0.3)
-    typewriter("Prologue: Awakening")
+
+    say("Prologue: Awakening")
     time.sleep(2)
-    typewriter("You wake up sitting in front of the ashes of a recently lit campfire.")
+    say("You wake up sitting in front of the ashes of a recently lit campfire.")
     time.sleep(0.3)
-    typewriter("Your memory is hazy.")
+    say("Your memory is hazy.")
     time.sleep(0.3)
-    typewriter("Your back is pressed against a cold stone wall that once belonged to a small fortress within the land.")
+    say("Your back is pressed against a cold stone wall that once belonged to a small fortress within the land.")
     time.sleep(0.3)
-    typewriter("Beside you lies your armour, in need of repair.\nBeside it is a sword with a faint red glow, buried in snow.")
+    say("Beside you lies your armour, in need of repair.\nBeside it is a sword with a faint red glow, buried in snow.")
     time.sleep(0.3)
-    typewriter("You look toward the sky. A crimson moon sinks slowly behind the trees.\nDaylight is near, but the night is still bitter.")
+    say("You look toward the sky. A crimson moon sinks slowly behind the trees.\nDaylight is near, but the night is still bitter.")
     time.sleep(0.3)
-    typewriter("You stand up and consider your next move...\n")
+    say("You stand up and consider your next move...\n")
 
     print("a) Equip your armour")
     print("b) Inspect the small camp around you")
@@ -289,18 +291,20 @@ def Chapter_one_start():
         check_fire()
     elif choice == "c":
         check_sword()
-# ───────────────────────────────────────────────
-# Last Chance to equip armor
-# ───────────────────────────────────────────────
+
+    # ───────────────────────────────────────────────
+    # Last Chance to equip armor
+    # ───────────────────────────────────────────────
     if not player["armored"]:
         equip_armor_scene_1()
 
-# ───────────────────────────────────────────────
-# Bonus Encounter if not armored
-# ───────────────────────────────────────────────
+    # ───────────────────────────────────────────────
+    # Bonus Encounter if not armored
+    # ───────────────────────────────────────────────
     if not player["armored"]:
         unarmored_event()
-#Start of Scene 2
+
+    # Start of Scene 2
     chapter_one_scene2()
 
 
@@ -308,7 +312,8 @@ def chapter_one_scene2():
     switch_music("audio/bgmusic_village.mp3", fadeout_time=2000)
     player["checkpoint"] = "chapter_one_scene_2"
     perform_save()
-    typewriter("You approach the village just as sun begins to peek above the sun.")
+
+    say("You approach the village just as sun begins to peek above the sun.")
     time.sleep(0.5)
 
     print("a) travel to the Inn")
