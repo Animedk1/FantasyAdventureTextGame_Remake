@@ -45,4 +45,4 @@ musicOn = True # Default: Music is on
 # ───────────────────────────────────────────────
 # Dialouge_Log State
 # ───────────────────────────────────────────────
-dialouge_log = []
+dialogue_log = []

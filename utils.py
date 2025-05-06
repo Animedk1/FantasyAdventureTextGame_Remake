@@ -4,6 +4,7 @@ import os
 import pygame
 import random
 import state 
+import textwrap
 
 # ───────────────────────────────────────────────
 # SYSTEM UTILITIES
@@ -80,15 +81,15 @@ typing_sounds = [
     pygame.mixer.Sound("audio/click5.wav"),
 ]
 
-def typewriter(text, delay=0.05):
+def typewriter(text, delay=0.05, speaker=None):
+    if text.strip():
+        if speaker:
+            state.dialogue_log.append(f"{speaker}:\n{text}")
+        else:
+            state.dialogue_log.append(f"Narrator:\n{text}")
 
-    if text.strip():  # Avoid logging blank lines
-        state.dialogue_log.append(text)
-        # Keep only the last 15 entries
-        if len(state.dialogue_log) > 15:
-            state.dialogue_log.pop(0)
 
-
+    #typewriter Effecct
     for char in text:
         if state.soundOP:
             sound = random.choice(typing_sounds)
@@ -171,6 +172,7 @@ def get_choice(valid_choices):
 
         if choice == "help":
             print("\u001b[33mAvailable Commands:\u001b[0m")
+            print("  \u001b[1mlog\u001b[0m       - Review the last few lines of dialogue")
             print("  \u001b[1mstats\u001b[0m     - View your character stats and relationships")
             print("  \u001b[1minventory\u001b[0m - See what items you're carrying")
             print("  \u001b[1mgold\u001b[0m      - Check how much gold you have")
@@ -213,6 +215,12 @@ def get_choice(valid_choices):
             typewriter("Background music has been stopped.")
         elif choice in valid_choices:
             return choice
+        elif choice in ["log", "history"]:
+            print("\n\u001b[36m--- Recent Dialogue ---\u001b[0m")
+            print("\n".join(state.dialogue_log))
+            print("\n(Type your choice again below.)")
+
+
         else:
             typewriter("Invalid choice. Try again.")
 

@@ -237,7 +237,7 @@ def travel_to_tavern():
     #Rewrite this and add more visual description to ground the user in the environment
     typewriter("The place looks a bit rundown, but the decor creates a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity")
     time.sleep(1)
-    typewriter
+    typewriter("As yo")
 
 
 
