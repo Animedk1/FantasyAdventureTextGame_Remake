@@ -141,7 +141,33 @@ def travel_to_inn():
     time.sleep(0.5)
     say("As you walk into the town exhausted you come across and INN that appears to be open")
     time.sleep(0.5)
-
+    say("You walk in to find the place empty, but there are signs that someone is here")
+    time.sleep(0.5)
+    say("Just as you go to take a rest in a near by chair you hear a loud boom coming from a room nearby")
+    time.sleep(0.5)
+    say("You jump up on guard and make your way to the doorway of the other room")
+    time.sleep(4)
+    clear_screen()
+    say("Ah man, the old man's going to kill me for this", speaker= "Disappointed Man")
+    time.sleep(0.5)
+    say("As you approach the doorway you step on a loose floor board near by")
+    time.sleep(1)
+    say("The man quickly turns around to inspect the npise behind him")
+    time.sleep(4)
+    say("Oh Hi Friend, I didn't hear you come in, we typically don't have too much activity at these hours so I can't say I was paying to much attention\n" \
+    "What should I call you?", speaker="Disappointed Man")
+    time.sleep(0.5)
+    say("You struggle for a moment, but somehow remember your name")
+    #Pulls player name from state
+    name = player["name"] or "stranger"
+    say(f"{name}...My name is {name}'", speaker=f"{name}")
+    time.sleep(0.5)
+    say(f"Well {name} it's a good thing you came when you did. Name's Markus", speaker="Disappinted Man")
+    time.sleep(0.5)
+    say("You probably already heard, but I have a bit of a situation here")
+    
+    
+    
 
 def travel_to_tavern():
     player["checkpoint"] = "chapter_one_scene_2_tavern"
@@ -237,7 +263,7 @@ def travel_to_tavern():
     # Rewrite note preserved
     say("The place looks a bit rundown, but the decor creates a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity")
     time.sleep(1)
-    say("As yo")  # Original partial line preserved for you to complete later
+    say("As you")  # Original partial line preserved for you to complete later
 
 
 
