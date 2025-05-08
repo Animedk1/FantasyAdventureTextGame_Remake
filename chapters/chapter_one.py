@@ -1,5 +1,5 @@
 import time
-from state import player, game_state
+from state import player, game_state, last_prompt
 from utils import typewriter, clear_screen, get_choice, say
 from engine import unarmored_event
 from utils import play_skill_gain_sound, print_speaker, perform_save,switch_music
@@ -303,11 +303,13 @@ def Chapter_one_start():
     say("You look toward the sky. A crimson moon sinks slowly behind the trees.\nDaylight is near, but the night is still bitter.")
     time.sleep(0.3)
     say("You stand up and consider your next move...\n")
+    last_prompt = "You stand up and consider your next move...\n"
 
     print("a) Equip your armour")
     print("b) Inspect the small camp around you")
     print("c) Inspect the sword beneath the snow\n")
     print("(Type 'help' for command list)")
+    
 
     choice = get_choice(["a", "b", "c"])
 

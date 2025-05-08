@@ -179,9 +179,14 @@ def get_choice(valid_choices):
             return choice
         elif choice in ["log", "history"]:
             show_log()
-            print("\n(Type your choice again below.)")
-        else:
-            typewriter("Invalid choice. Try again.")
+            print("\n\u001b[90m(Showing previous dialogue... returning to choice in 5 seconds.)\u001b[0m")
+            time.sleep(5)
+
+            if state.last_prompt:
+                print(f"\n\u001b[35m{state.last_prompt}\u001b[0m")  # Colored reprint of the last prompt
+
+            print("\n\u001b[32mPlease make your choice again:\u001b[0m")
+
 
 def game_over():
     clear_screen()

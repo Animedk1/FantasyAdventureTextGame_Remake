@@ -46,3 +46,4 @@ musicOn = True # Default: Music is on
 # Dialouge_Log State
 # ───────────────────────────────────────────────
 dialogue_log = []
+last_prompt = ""
