@@ -1,127 +1,132 @@
 import time
-import os
-import state
+import random
+from combat.utils_combat import get_health_bar, calculate_damage, attempt_dodge, random_success
 from utils import typewriter, safe_input, clear_screen
-from combat.utils_combat import get_health_bar, calculate_damage
+import state
+from combat.combatants import Combatant
 
+# ───────────────────────────────────────────────
+# Main Battle Function
+# Handles player-enemy interaction and battle loop
+# ───────────────────────────────────────────────
 def battle(player, enemy):
     typewriter(f"A wild {enemy.name} appears!")
+    time.sleep(1)
 
+    # Main battle loop
     while player.is_alive() and enemy.is_alive():
         clear_screen()
-        display_health(player, enemy)
+        print("============== BATTLE ==============")
+        print("Your Health :", get_health_bar(player.health, player.max_health))
+        print("Enemy Health:", get_health_bar(enemy.health, enemy.max_health))
+        print("====================================\n")
 
-        print("\nChoose your action:")
-        print("a) Attack")
-        print("b) Use Item")
+        print("Choose your action:")
+        print("a) Light Attack")   # High hit chance, lower damage
+        print("b) Strong Attack")  # Lower hit chance, high damage
+        print("c) Use Item")       # Placeholder for future item use
+
         action = safe_input("→ ").lower()
-
         enemy_action = enemy.decide_action()
 
-        # Player Turn
+        # Light attack logic
         if action == "a":
-            damage, critical = calculate_damage(player, enemy)
-
-            if enemy_action == "dodge":
-                if attempt_dodge(enemy):
-                    typewriter(f"The {enemy.name} dodged your attack!")
-                else:
-                    enemy.health -= damage
-                    typewriter(f"You hit the {enemy.name} for {damage} damage.")
-                    if critical:
-                        typewriter("Critical Hit!")
-            elif enemy_action == "defend":
-                reduced = int(damage * 0.5)
-                enemy.health -= reduced
-                typewriter(f"The {enemy.name} defended. They took only {reduced} damage.")
-            else:
+            damage, critical = calculate_damage(player, enemy, kind="light")
+            if enemy_action == "dodge" and attempt_dodge(enemy):
+                typewriter(f"The {enemy.name} dodged your light attack!")
+            elif random_success(0.9):  # High success chance
                 enemy.health -= damage
                 typewriter(f"You hit the {enemy.name} for {damage} damage.")
                 if critical:
                     typewriter("Critical Hit!")
+            else:
+                typewriter("Your attack missed!")
 
+        # Strong attack logic
         elif action == "b":
-            use_item(player)  # Placeholder logic for now
+            damage, critical = calculate_damage(player, enemy, kind="strong")
+            if enemy_action == "dodge" and attempt_dodge(enemy):
+                typewriter(f"The {enemy.name} dodged your strong attack!")
+            elif random_success(0.6):  # Lower success chance
+                enemy.health -= damage
+                typewriter(f"You smash the {enemy.name} for {damage} damage.")
+                if critical:
+                    typewriter("Critical Hit!")
+            else:
+                typewriter("Your heavy swing misses its mark!")
+
+        # Placeholder for item use
+        elif action == "c":
+            typewriter("You rummage through your items... (Item use not yet implemented.)")
+
+        # Invalid input fallback
         else:
             typewriter("Invalid action. You hesitate.")
 
         time.sleep(1)
 
-        # Enemy Turn
+        # ───────────────────────────────────────────────
+        # Enemy Turn + Player Defense Options (Dodge/Defend)
+        # ───────────────────────────────────────────────
         if enemy.is_alive():
-            clear_screen()
-            display_health(player, enemy)
-            typewriter(f"The {enemy.name} is preparing to attack!")
-            print("\nChoose your reaction:")
-            print("a) Defend")
-            print("b) Dodge")
+            print("\nThe enemy prepares to attack.")
+            print("a) Dodge")
+            print("b) Defend")
 
-            choice = timed_input("→ ", timeout=5).lower()
+            reaction = safe_input("→ ").lower()
+            dmg, critical = calculate_damage(enemy, player)
 
-            defend = False
-            dodge = False
-
-            if choice == "a":
-                defend = True
-                typewriter("You brace for the incoming attack...")
-            elif choice == "b":
-                dodge = attempt_dodge(player)
-                if dodge:
-                    typewriter("You dodged the enemy’s attack!")
-                    # Successful dodge deals chip damage back
-                    chip = int(player.dexterity * 0.5)
-                    enemy.health -= chip
-                    typewriter(f"You counter slightly and deal {chip} damage to the {enemy.name}!")
-                    continue
+            if reaction == "a":
+                if attempt_dodge(player):
+                    typewriter("You successfully dodged!")
+                    enemy.health -= 3  # Light counterattack
+                    typewriter("You counter slightly while dodging! (3 damage)")
                 else:
-                    typewriter("You failed to dodge...")
-            else:
-                typewriter("You froze and did nothing!")
-
-            damage, critical = calculate_damage(enemy, player)
-            if defend:
-                damage = int(damage * 0.5)
+                    player.health -= dmg
+                    typewriter(f"You failed to dodge. The {enemy.name} hits you for {dmg}.")
+            elif reaction == "b":
+                reduced = int(dmg * 0.5)
                 if critical:
-                    damage = int(damage * 1.5)
-            player.health -= damage
-            typewriter(f"The {enemy.name} hits you for {damage} damage.")
-            if critical:
-                typewriter("Critical Hit!")
+                    reduced = int(reduced * 1.5)
+                player.health -= reduced
+                typewriter(f"You defend. You take {reduced} damage.")
+            else:
+                player.health -= dmg
+                typewriter(f"You hesitate. The {enemy.name} hits you for {dmg}.")
 
         time.sleep(2)
 
+    # ───────────────────────────────────────────────
+    # Battle outcome
+    # ───────────────────────────────────────────────
     clear_screen()
     if player.is_alive():
         typewriter(f"\nYou defeated the {enemy.name}!")
     else:
         typewriter("\nYou were defeated...")
 
-# Display both health bars at top of screen
-def display_health(player, enemy):
-    print(f"\n\u001b[1mYour Health:\u001b[0m  {get_health_bar(player.health, player.max_health)}")
-    print(f"\u001b[1mEnemy Health:\u001b[0m {get_health_bar(enemy.health, enemy.max_health)}")
+# ─────────────────────────────────────────────────────────────
+# Helper used to trigger battle cleanly from main story chapters
+# ─────────────────────────────────────────────────────────────
+def start_battle(enemy, reward_gold=10, reward_item=None):
+    player = Combatant(
+        name=state.player["name"] or "Hero",
+        health=state.player.get("health", 100),
+        strength=state.player["stats"].get("strength", 5),
+        intelligence=state.player["stats"].get("intelligence", 5),
+        dexterity=state.player["stats"].get("dexterity", 5),
+    )
 
-# Dodge logic
-def attempt_dodge(combatant):
-    import random
-    return random.random() < (0.1 + combatant.dexterity * 0.02)
+    battle(player, enemy)
 
-# Timed input fallback
-def timed_input(prompt, timeout=5):
-    import threading
+    # Update persistent player health after combat
+    state.player["health"] = player.health
 
-    result = {"value": ""}
+    # Victory rewards
+    if player.is_alive():
+        typewriter(f"You found {reward_gold} gold.")
+        state.player["gold"] += reward_gold
 
-    def get_input():
-        result["value"] = input(prompt)
-
-    thread = threading.Thread(target=get_input)
-    thread.daemon = True
-    thread.start()
-    thread.join(timeout)
-
-    return result["value"] if result["value"] else ""
-
-# Placeholder item usage (expand later)
-def use_item(player):
-    typewriter("You fumble through your bag... but have no items yet.")
+        if reward_item:
+            typewriter(f"You obtained: {reward_item}")
+            state.player["inventory"].append(reward_item)

@@ -4,7 +4,7 @@ from utils import typewriter, clear_screen, get_choice, say
 from engine import unarmored_event
 from utils import play_skill_gain_sound, print_speaker, perform_save,switch_music,say_with_pauses
 from combat.enemies import create_shouting_man
-from combat.battle_system import battle
+from combat.battle_system import start_battle
 
 
 # ───────────────────────────────────────────────
@@ -293,27 +293,20 @@ def travel_to_tavern():
 
     say("...")  # Original partial line preserved for continuation
 
-    from combat.combatants import Combatant
-    from combat.enemies import create_shouting_man
-    from combat.battle_system import battle
 
-    # Convert the state.player dict into a Combatant object
-    player_combatant = Combatant(
-        name=state.player["name"] or "Hero",
-        health=state.player.get("health", 100),
-        strength=state.player["stats"].get("strength", 5),
-        intelligence=state.player["stats"].get("intelligence", 5),
-        dexterity=state.player["stats"].get("dexterity", 5),
-    )
+    # ───────────────────────────────────────────────
+    # Chapter 1: Battle 1
+    # ───────────────────────────────────────────────
 
+    #Save Game  - Pre-combat checkpoint:
+    perform_save()
+    state.player["checkpoint"] = "chapter_one_battle_1"
+    
 
-
-    #Battle Start
+    #Start Battle
     enemy = create_shouting_man()
-    battle(player_combatant, enemy)
-
-    #save player health
-    state.player["health"] = player_combatant.health
+    start_battle(enemy, reward_gold=15, reward_item="Health Potion")
+    
 
     say("Test String")
 

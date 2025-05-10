@@ -69,6 +69,9 @@ def resume_checkpoint(point):
         travel_to_inn()
     elif point == "chapter_one_scene_2_tavern":
         travel_to_tavern()
+    elif point == "chapter_one_battle_1":
+        travel_to_tavern() # Create a fucntiont that contains the battle so the player can resume for before the fight
+        
     
     else:
         typewriter("Unknown checkpoint. Starting from the beginning...")
