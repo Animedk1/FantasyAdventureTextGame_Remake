@@ -228,15 +228,24 @@ def game_over():
 # DIALOGUE / LOGGING
 # ───────────────────────────────────────────────
 
-def say(text, speaker=None):
-    label = f"\u001b[33m{speaker}:\u001b[0m" if speaker else "\u001b[35mNarrator:\u001b[0m"
-    log_name = label
+def say(text, speaker=None, skip_log=False):
+    if speaker:
+        label = f"\u001b[33m{speaker}:\u001b[0m"
+        log_prefix = f"{speaker}:"
+    else:
+        label = "\u001b[35mNarrator:\u001b[0m"
+        log_prefix = "Narrator:"
+
     print(f"\n{label}")
     typewriter(text)
-    entry = f"{log_name} {text.replace(chr(10), ' ')}\n"
-    state.dialogue_log.append(entry)
-    if len(state.dialogue_log) > 30:
-        state.dialogue_log.pop(0)
+
+    if not skip_log:
+        collapsed_text = text.replace("\n", " ").strip()
+        log_entry = f"{log_prefix} {collapsed_text}"
+        state.dialogue_log.append(log_entry)
+        if len(state.dialogue_log) > 30:
+            state.dialogue_log.pop(0)
+
 
 def show_log():
     print("\n\u001b[36m--- Dialogue Log ---\u001b[0m\n")
@@ -254,3 +263,31 @@ def perform_save():
         save_game()
     except Exception as e:
         typewriter(f"An error occurred while saving the game: {e}")
+# ───────────────────────────────────────────────
+# Dialouge Text Wrapper - Creates pause between lines and removes the redudant speaker tag
+# ───────────────────────────────────────────────
+def say_with_pauses(lines, delay=0.5, speaker=None):
+    if not lines:
+        return
+
+    # Show the speaker label once
+    if speaker:
+        print(f"\n\u001b[33m{speaker}:\u001b[0m")
+    else:
+        print(f"\n\u001b[35mNarrator:\u001b[0m")
+
+    # Show each line with typewriter and delay
+    for line in lines:
+        typewriter(line)
+        time.sleep(delay)
+        print()  # Adds space between lines
+
+    # Add one combined entry to the dialogue log
+    collapsed_text = " ".join(lines).replace("\n", " ").strip()
+    color = "\u001b[33m" if speaker else "\u001b[35m"
+    label = f"{color}{speaker or 'Narrator'}:\u001b[0m"
+    state.dialogue_log.append(f"{label} {collapsed_text}\n")
+
+    if len(state.dialogue_log) > 30:
+        state.dialogue_log.pop(0)
+
