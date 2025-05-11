@@ -36,13 +36,13 @@ def check_sword():
 
     # Mysterious Voice monologue
     say_with_pauses([
-        "Your time is short here so listen.",
-        "You will understand with time but you are not the first to have been gifted with my power.",
+        "Your time is short here, so listen.",
+        "You will understand with time, but you are not the first to have been gifted with my power.",
         "We shall hope you will be the last.",
         "A plague has spread throughout the isles from which you hail. So far as to reach within my domain.",
         "The isles must burn and you need to be the one to ignite the flame.",
         "Take the sword I've given you to the capital city of Aedros.",
-        "You are not my only chosen, but you are important. If you value your life and the lives of those you will soon meet, I caution you to take this task seriously."
+        "You are not my only choice, but you are important. If you value your life and the lives of those you will soon meet, I caution you to take this task seriously."
     ], speaker="Mysterious Voice", delay=1)
 
     time.sleep(4)
@@ -68,9 +68,9 @@ def equip_armour():
     say_with_pauses([
         "You grab the armour from the snow.",
         "Upon closer inspection, you realize you've never seen armor made of this material.",
-        "When placing the armour on your body, you're met with a feeling of dread—a burning sensation courses through you.",
-        "The armor begins to dissipates within your skin and a red symbol is burned into the palm of your hand.",
-        "Although the armor isn't visible you can still feel it's protection"
+        "When placing the armour on your body, you're met with a feeling of dread; a burning sensation courses through you.",
+        "The armor begins to dissipate within your skin and a red symbol is burned into the palm of your hand.",
+        "Although the armor isn't visible, you can still feel its protection"
     ], delay=0.3)
 
     state.player["armored"] = True
@@ -85,9 +85,9 @@ def equip_armour_after_Sword():
     say_with_pauses([
         "You grab the armour from the snow.",
         "Upon closer inspection, you realize you've never seen armor made of this material.",
-        "When placing the armour on your body, you're met with a feeling of dread—a burning sensation courses through you.",
-        "The armor begins to dissipates within your skin and a red symbol is burned into the palm of your hand.",
-        "Although the armor isn't visible you can still feel it's protection"
+        "When placing the armour on your body, you're met with a feeling of dread; a burning sensation courses through you.",
+        "The armor begins to dissipate within your skin and a red symbol is burned into the palm of your hand.",
+        "Although the armor isn't visible, you can still feel its protection"
     ], delay=0.3)
 
     state.player["armored"] = True
@@ -101,8 +101,8 @@ def check_fire():
     say_with_pauses([
         "You lean down and check the fire.",
         "It's too far gone. The embers are cold and dead.",
-        "After inspecting the fire you see the snow is covering the remains of what looks like was once a campsite.",
-        "Upon further inspection you can tell this place was abandoned some time ago...though exactly how long, you can't quite tell."
+        "After inspecting the fire, you see the snow is covering the remains of what looks like was once a campsite.",
+        "Upon further inspection, you can tell this place was abandoned some time ago...though exactly how long, you can't quite tell."
     ], delay=0.5)
 
     # Notification Sound
@@ -111,7 +111,7 @@ def check_fire():
     state.player["stats"]["intelligence"] += 1
 
     say_with_pauses([
-        "While taking in the environment around you, you hear a feint noise that echoes that of a whisper.",
+        "While taking in the environment around you, you hear a faint noise that echoes that of a whisper.",
         "Upon further inspection, you notice it's the sword."
     ], delay=0.5)
 
@@ -144,10 +144,10 @@ def travel_to_inn():
     clear_screen()
 
     say_with_pauses([
-        "As you walk into the town exhausted you come across and INN that appears to be open.",
+        "As you wearily walk into the town, you come across an inn that appears to be open.",
         "You walk in to find the place empty, but there are signs that someone is here.",
-        "Just as you go to take a rest in a nearby chair you hear a loud boom coming from a room nearby.",
-        "You jump up on guard and make your way to the doorway of the other room."
+        "Just as you move to rest in a nearby chair, you hear a loud boom coming from a room nearby.",
+        "You jump up vigilantly and make your way to the doorway of the other room."
     ], delay=0.5)
 
     time.sleep(4)
@@ -155,13 +155,13 @@ def travel_to_inn():
 
     say("Ah man, the old man's going to kill me for this", speaker="Disappointed Man")
     time.sleep(0.5)
-    say("As you approach the doorway you step on a loose floor board nearby.")
+    say("As you approach the doorway, you step on a loose floor board nearby.")
     time.sleep(1)
     say("The man quickly turns around to inspect the noise behind him.")
     time.sleep(4)
 
     say(
-        "Oh Hi Friend, I didn't hear you come in, we typically don't have too much activity at these hours "
+        "Oh hello friend, I didn't hear you come in. We typically don't have too much activity around these hours "
         "so I can't say I was paying too much attention.\n"
         "What should I call you?",
         speaker="Disappointed Man"
@@ -189,8 +189,8 @@ def travel_to_tavern():
     clear_screen()
 
     say_with_pauses([
-        "As you walk towards what looks to be the Tavern of the village you notice, a few people gathered around near the entrance.",
-        "Above the door you see a brown haired woman leaning out the window.",
+        "As you walk towards what appears to be the tavern of the village, you notice a few people gathered near the entrance.",
+        "Above the door, you see a brown haired woman leaning out the window.",
         "You hear shouting as you approach"
     ], delay=0.5)
 
@@ -200,42 +200,42 @@ def travel_to_tavern():
     # Argument between NPCs
     say("I already told you to get the hell out of here, I've gotta open this place up in a few hours\nand I also wouldn't mind just getting a little more sleep!", speaker="Shouting Woman (From upper floor window)")
     time.sleep(0.5)
-    say("You piece of shit! I know you were in on it with that guy at the bar, you can't fool me!", speaker="Shouting Man")
+    say("You piece of shit! I knew you were in on it with that guy at the bar, you can't fool me!", speaker="Shouting Man")
     time.sleep(0.5)
-    say("Don't blame your poor playing skills on me", speaker="Shouting Woman")
+    say("Don't blame your poor playing skills on me!", speaker="Shouting Woman")
     time.sleep(0.5)
-    say("You know what, I'll be back, just you wait, I'm coming for you, that man, and my damn money", speaker="Shouting Man")
+    say("You know what? I'll be back, just you wait- I'm coming for you, that man, and my damn money", speaker="Shouting Man")
     time.sleep(0.5)
     say_with_pauses([
         "Yeah, I'm sure you will.",
-        "I've had enough of this shit, I'm going back to sleep, Tavern opens in 3 hours now because of this fool",
+        "I've had enough of this shit- I'm going back to sleep. The tavern opens in three hours now because of this fool",
         ],speaker="Shouting Woman", delay=0.5)
 
     time.sleep(5)
     clear_screen()
 
-    say("After witnessning that argument unfold in front of you, you hear an unfamiliar voice coming from behind you")
+    say("After witnessing the argument unfold in front of you, you hear an unfamiliar voice coming from behind you")
     time.sleep(0.5)
 
-    say("I've never seen you around here before, we get vistors from time to time, but they usually don't look\nlike they've been though whatever Hell you've been through", speaker="Villager")
+    say("I've never seen you around here before; we get visitors from time to time, but they usually don't look\nlike they've been through whatever the hell you've been through", speaker="Villager")
     time.sleep(5)
 
     clear_screen()
     time.sleep(0.5)
 
-    say("You look down and realize your clothes show sign of burns that could have been only cooled by the Icy winds from the moutains you traveld from")
+    say("You look down and realize your clothes show signs of burns that could have been only cooled by the icy winds from the mountains you traveled from.")
 
     # ───────────────────────────────────────────────
     # Chapter 1: Scene 2: Dialogue 1 Choice
     # ───────────────────────────────────────────────
-    say("So I can't help but ask but..what the hell happened to you?", speaker="Villager")
+    say("So, I can't help but ask...what the hell happened to you?", speaker="Villager")
 
     print("a) Tell him you're not sure what happened to you")
     print("b) Tell him about your meeting with Viirish")
 
     # Save Prompt
     state.last_prompt = (
-        "So I can't help but ask but..what the hell happened to you?\n\n"
+        "So, I can't help but ask...what the hell happened to you?\n\n"
         "a) Tell him you're not sure what happened to you\n"
         "b) Tell him about your meeting with Viirish"
     )
@@ -249,7 +249,7 @@ def travel_to_tavern():
     if choice == "a":
         say("Strange...", speaker="Villager")
         time.sleep(0.3)
-        say("But I'm not judging, I've definetly had my days of waking up in the woods drunk off my ass so I get you", speaker="Villager")
+        say("But I'm not judging, I've definitely had my days of waking up in the woods drunk off my ass, so I get you", speaker="Villager")
         time.sleep(5)
         clear_screen()
         time.sleep(0.3)
@@ -260,7 +260,7 @@ def travel_to_tavern():
         time.sleep(0.3)
         say("Alderos has watched over us since I was born though", speaker="Villager")
         time.sleep(0.3)
-        say("You definetly might not want to mention that name around here, I was only just being born at the time\nbut there are some people around here old enough to remember those days", speaker="Villager")
+        say("You might not want to mention that name around here; I was only born at the time\nbut there are some people around here old enough to remember those days", speaker="Villager")
         time.sleep(5)
         clear_screen()
         time.sleep(0.3)
@@ -271,47 +271,47 @@ def travel_to_tavern():
     # Continue Scene
     say("Name's Peter, what should I call you?", speaker="Villager")
     time.sleep(2)
-    say("You scramble to remeber your name")
+    say("You scramble to remember your name.")
     time.sleep(0.3)
 
     name = state.player["name"] or "stranger"
     say(f"{name}...My name is {name}'", speaker=f"{name}")
     time.sleep(0.3)
 
-    say(f"Well good to meet you {name}.", speaker="Peter")
+    say(f"Well, good to meet you {name}.", speaker="Peter")
     time.sleep(0.3)
-    say("I'm assuming you probably haven't eatin in a while either, if you want we can head inside the tavern", speaker="Peter")
+    say("I'm assuming you haven't eaten in a while either. If you want, we can head inside the tavern", speaker="Peter")
     time.sleep(0.3)
-    say("My older sister Erena owns the place so we kinda have free reign there. I'll introduce you", speaker="Peter")
+    say("My older sister Erena owns the place, so we have free reign there. I'll introduce you", speaker="Peter")
     time.sleep(5)
 
     clear_screen()
-    say("You and Peter walk into the tavern and walk toward the kitchen")
+    say("You and Peter walk into the tavern and walk towards the kitchen")
     time.sleep(0.5)
 
     # Rewrite note preserved
-    say("The place looks a bit rundown, but the decor creates a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity\nYouwalk over with Peter to take a seat at the bar.")
+    say("The place looks a bit rundown, but the decor adds a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity\nYou walk over with Peter to take a seat at the bar.")
     time.sleep(0.5)
 
     say_with_pauses([
         "ERENA! (Peter Shouts)",
-        "Guess she wasn't kidding about going back to sleep...Which means..",
-        "Bars all ours!"
+        "Guess she wasn't kidding about going back to sleep. Which means..",
+        "bar's all ours!"
     ], speaker="Peter", delay=0.5)  
 
     time.sleep(0.5)
 
-    say("Peter jumps out his seat excited.")
+    say("Peter excitedly jumps out of his seat.")
 
     time.sleep(0.5)
     
     say_with_pauses([
-        "But before we start drinking,,.because trust me you look like you need one more than me",
-        "I can't help but notice that sword on your back, it's unlike anything I've ever seen around here",
-        "You must really good at swrod fighting tobe carrying something like that",
-        "I've been rpactiving a bit myself, so let's say we put a bit of a wager on this",
+        "But before we start drinking-because trust me, you look like you need one more than me-",
+        "I can't help but notice that sword on your back. It's unlike anything I've ever seen around here",
+        "You must be really good at sword fighting to be carrying something like that",
+        "I've been practicing a bit myself, so let's say we put a bit of a wager on this",
         "If you win.... but if I win.....",
-        "What do you say are you up for it?"
+        "What do you say: are you up for it?"
     ], speaker="Peter", delay=0.5)         
     
     time.sleep(0.5)
@@ -330,17 +330,17 @@ def travel_to_tavern():
 
     # Save Prompt
     state.last_prompt = (
-        "Would you liek to try the tutorial fight?\n\n"
+        "Would you like to try the tutorial fight?\n\n"
         "a) Sure!\n"
-        "b) not this time"
+        "b) Not this time"
     )
 
     choice = get_choice(["a", "b", "c"] if state.player["stats"]["intelligence"] >= 6 else ["a", "b"])
 
     if choice == "a":
         say_with_pauses([
-            "See I knew I liked you!",
-            "Oh, before I forget take drink this, I need you at full strength for this.",
+            "See, I knew I liked you!",
+            "Oh, before I forget: drink this. I need you at full strength for this.",
         ], speaker="Peter", delay=0.5)    
         time.sleep(5)
         clear_screen()
@@ -352,8 +352,8 @@ def travel_to_tavern():
 
     elif choice == "b":
         say_with_pauses([
-            "See I knew I liked you!",
-            "Oh, before I forget take drink this, I need you at full strength for this.",
+            "See, I knew I liked you!",
+            "Oh, before I forget: drink this. I need you at full strength for this.",
         ], speaker="Peter", delay=0.5)    
         time.sleep(5)
         clear_screen()
@@ -461,12 +461,12 @@ def chapter_one_scene2():
     state.player["checkpoint"] = "chapter_one_scene_2"
     perform_save()
 
-    say("You approach the village just as sun begins to peek above the sun.")
+    say("You approach the village just as the sun begins to peek above the mountains.")
     time.sleep(0.5)
 
     # Save prompt for dialogue log
     state.last_prompt = (
-        "You approach the village just as sun begins to peek above the sun.\n\n"
+        "You approach the village just as the sun begins to peek above the mountains.\n\n"
         "a) travel to the Inn\n"
         "b) travel to the Tavern\n"
         "(Type 'help' for command list)"
