@@ -9,9 +9,12 @@ from combat.combatants import Combatant
 # Main Battle Function
 # Handles player-enemy interaction and battle loop
 # ───────────────────────────────────────────────
-def battle(player, enemy):
-    typewriter(f"A wild {enemy.name} appears!")
-    time.sleep(1)
+def battle(player, enemy, reward_gold=0, reward_item=None, intro_text=None):
+    if intro_text:
+        typewriter(intro_text)
+        time.sleep(2)
+    else:
+        typewriter(f"A wild {enemy.name} appears!")
 
     # Main battle loop
     while player.is_alive() and enemy.is_alive():
@@ -108,7 +111,7 @@ def battle(player, enemy):
 # ─────────────────────────────────────────────────────────────
 # Helper used to trigger battle cleanly from main story chapters
 # ─────────────────────────────────────────────────────────────
-def start_battle(enemy, reward_gold=10, reward_item=None):
+def start_battle(enemy, reward_gold=10, reward_item=None, intro_text=None):
     player = Combatant(
         name=state.player["name"] or "Hero",
         health=state.player.get("health", 100),
@@ -117,7 +120,7 @@ def start_battle(enemy, reward_gold=10, reward_item=None):
         dexterity=state.player["stats"].get("dexterity", 5),
     )
 
-    battle(player, enemy)
+    battle(player, enemy, reward_gold, reward_item, intro_text)
 
     # Update persistent player health after combat
     state.player["health"] = player.health

@@ -2,6 +2,8 @@ import random
 import time
 from utils import typewriter, safe_input, clear_screen,print_speaker,game_over, play_skill_gain_sound
 from state import player, game_state
+from combat.enemies import create_shouting_man, create_peter_practice1
+from combat.battle_system import start_battle
 
 # ───────────────────────────────────────────────
 # ONE-TIME RANDOM EVENTS
@@ -128,3 +130,13 @@ def modify_relationship(name: str, value: int):
     else:
         typewriter(f"Relationship with {name} does not exist.")
 
+
+
+# ───────────────────────────────────────────────
+# Battle Functions
+# - A place to create wrapper funtions for battles
+#   - Mainly to be able to create save points
+# ───────────────────────────────────────────────
+def Peter_battle_tutorial():
+    enemy = create_peter_practice1()
+    start_battle(enemy, reward_gold=15, reward_item="Health Potion")

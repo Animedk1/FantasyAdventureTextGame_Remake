@@ -53,3 +53,18 @@ def create_shouting_man():
         dexterity=3,
         behavior="aggressive"
     )
+
+def create_peter_practice1():
+    """
+    Practice Encounter with NPC Peter.
+    Balanced
+
+    """
+    return Enemy(
+        name="Peter_Chpt1_Practice",
+        health=100,
+        strength=2,
+        intelligence=4,
+        dexterity=3,
+        behavior="aggressive"
+    )

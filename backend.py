@@ -4,6 +4,7 @@ import time
 import state
 from utils import typewriter, clear_screen, safe_input, switch_music, checkpoint_music_map
 from chapters.chapter_one import Chapter_one_start, chapter_one_scene2,travel_to_inn,travel_to_tavern
+from combat.battle_scenarios import Peter_battle_tutorial
 #from config import DEV_MODE
 
 
@@ -71,6 +72,8 @@ def resume_checkpoint(point):
         travel_to_tavern()
     elif point == "chapter_one_battle_1":
         travel_to_tavern() # Create a fucntiont that contains the battle so the player can resume for before the fight
+    elif point == "Peter Tutorial battle":
+        Peter_battle_tutorial()
         
     
     else:

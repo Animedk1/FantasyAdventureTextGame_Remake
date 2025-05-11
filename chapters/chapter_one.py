@@ -5,6 +5,7 @@ from engine import unarmored_event
 from utils import play_skill_gain_sound, print_speaker, perform_save,switch_music,say_with_pauses
 from combat.enemies import create_shouting_man
 from combat.battle_system import start_battle
+from combat.battle_scenarios import Peter_battle_tutorial
 
 
 # ───────────────────────────────────────────────
@@ -205,9 +206,10 @@ def travel_to_tavern():
     time.sleep(0.5)
     say("You know what, I'll be back, just you wait, I'm coming for you, that man, and my damn money", speaker="Shouting Man")
     time.sleep(0.5)
-    say("Yeah, I'm sure you will.", speaker="Shouting Woman")
-    time.sleep(0.5)
-    say("I've had enough of this shit, I'm going back to sleep, Tavern opens in 3 hours now because of this fool", speaker="Shouting Woman")
+    say_with_pauses([
+        "Yeah, I'm sure you will.",
+        "I've had enough of this shit, I'm going back to sleep, Tavern opens in 3 hours now because of this fool",
+        ],speaker="Shouting Woman", delay=0.5)
 
     time.sleep(5)
     clear_screen()
@@ -288,10 +290,73 @@ def travel_to_tavern():
     time.sleep(0.5)
 
     # Rewrite note preserved
-    say("The place looks a bit rundown, but the decor creates a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity")
-    time.sleep(1)
+    say("The place looks a bit rundown, but the decor creates a warm charm to it.\nAlong the walls you see paintings of what appears to be some sort of deity\nYouwalk over with Peter to take a seat at the bar.")
+    time.sleep(0.5)
 
-    say("...")  # Original partial line preserved for continuation
+    say_with_pauses([
+        "ERENA! (Peter Shouts)",
+        "Guess she wasn't kidding about going back to sleep...Which means..",
+        "Bars all ours!"
+    ], speaker="Peter", delay=0.5)  
+
+    time.sleep(0.5)
+
+    say("Peter jumps out his seat excited.")
+
+    time.sleep(0.5)
+    
+    say_with_pauses([
+        "But before we start drinking,,.because trust me you look like you need one more than me",
+        "I can't help but notice that sword on your back, it's unlike anything I've ever seen around here",
+        "You must really good at swrod fighting tobe carrying something like that",
+        "I've been rpactiving a bit myself, so let's say we put a bit of a wager on this",
+        "If you win.... but if I win.....",
+        "What do you say are you up for it?"
+    ], speaker="Peter", delay=0.5)         
+    
+    time.sleep(0.5)
+
+    #Add a save game and a checkpoint here:
+
+
+    # ───────────────────────────────────────────────
+    # Chapter 1: Practice Battle 1: Peter
+    # ───────────────────────────────────────────────
+
+    say("Would you like to try the tutorial fight?")
+
+    print("a) Sure!")
+    print("b) Not this time")
+
+    # Save Prompt
+    state.last_prompt = (
+        "Would you liek to try the tutorial fight?\n\n"
+        "a) Sure!\n"
+        "b) not this time"
+    )
+
+    choice = get_choice(["a", "b", "c"] if state.player["stats"]["intelligence"] >= 6 else ["a", "b"])
+
+    if choice == "a":
+        say_with_pauses([
+            "See I knew I liked you!",
+            "Oh, before I forget take drink this, I need you at full strength for this.",
+        ], speaker="Peter", delay=0.5)    
+        time.sleep(5)
+        clear_screen()
+        time.sleep(0.3)
+        #Temporary
+        perform_save()
+        state.player["checkpoint"] = "Peter Tutorial battle"
+        Peter_battle_tutorial()
+
+    elif choice == "b":
+        say_with_pauses([
+            "See I knew I liked you!",
+            "Oh, before I forget take drink this, I need you at full strength for this.",
+        ], speaker="Peter", delay=0.5)    
+        time.sleep(5)
+        clear_screen()
 
 
     # ───────────────────────────────────────────────
